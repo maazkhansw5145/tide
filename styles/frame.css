@@ -1,0 +1,191 @@
+.vector-icon {
+  position: absolute;
+  height: 100.49%;
+  width: 71.81%;
+  top: 0;
+  right: 14.13%;
+  bottom: -0.49%;
+  left: 14.06%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.untitled-2-1-icon {
+  position: absolute;
+  top: 235px;
+  left: 800px;
+  width: 785px;
+  height: 465px;
+  object-fit: cover;
+}
+.group-icon,
+.rectangle-button {
+  position: absolute;
+  top: 662px;
+  left: 0;
+  width: 1939.65px;
+  height: 696.14px;
+}
+.rectangle-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: var(--color-pink);
+  top: 0;
+  border-radius: 4px;
+  width: 142px;
+  height: 40.52px;
+}
+.sign-up-free {
+  position: absolute;
+  top: 14.86px;
+  left: 12.17px;
+  font-size: var(--font-size-base);
+  line-height: 18px;
+  font-family: var(--font-hammersmith-one);
+  color: #00120a;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  width: 112.59px;
+  height: 10.13px;
+}
+.group-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 543px;
+  left: 0;
+  width: 142px;
+  height: 40.52px;
+}
+.assess {
+  color: var(--color-pink);
+}
+.effectively {
+  color: #2be5a1;
+}
+.best {
+  background: radial-gradient(
+    50% 50%at 50% 50%,
+    rgba(18, 255, 168, 0.65) 57.29%,
+    rgba(255, 82, 92, 0.78) 66.67%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.confidence {
+  color: var(--color-turquoise-100);
+}
+.assess-tech-talent-container {
+  line-break: anywhere;
+  width: 100%;
+}
+.assess-tech-talent-effectively {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: 722px;
+  height: 511.28px;
+}
+.text-icon {
+  position: absolute;
+  height: 9.08%;
+  width: 17.87%;
+  top: 58.1%;
+  right: 52.49%;
+  bottom: 32.82%;
+  left: 29.64%;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.tide-is-a-technical-interview {
+  position: absolute;
+  top: 433px;
+  left: 0;
+  font-size: 24px;
+  line-height: 26px;
+  color: #535353;
+  display: flex;
+  align-items: center;
+  width: 712px;
+}
+.group-div {
+  position: absolute;
+  top: 116px;
+  left: 63px;
+  width: 722px;
+  height: 583.52px;
+}
+.features {
+  left: 0;
+  width: 88px;
+}
+.features,
+.log-in,
+.sign-up {
+  position: absolute;
+  top: 2px;
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
+.log-in {
+  left: 144px;
+  width: 55px;
+}
+.sign-up {
+  left: 260px;
+  width: 75px;
+}
+.line-div,
+.line-icon {
+  position: absolute;
+  width: 1px;
+}
+.line-icon {
+  top: 0;
+  left: 232.72px;
+  height: 54px;
+}
+.line-div {
+  top: -0.5px;
+  left: 347.5px;
+  border-right: 1px solid var(--color-turquoise-100);
+  box-sizing: border-box;
+  height: 55px;
+}
+.group-a {
+  text-decoration: none;
+  position: absolute;
+  top: 48px;
+  left: 1193px;
+  width: 348px;
+  height: 54px;
+  font-size: var(--font-size-base);
+  color: var(--color-gray-200);
+}
+.tide-logo-original-5000x50 {
+  position: absolute;
+  top: calc(50% - 462px);
+  left: calc(50% - 763px);
+  width: 197px;
+  height: 58px;
+  object-fit: cover;
+}
+.frame-div {
+  position: relative;
+  background-color: #fdf7f7;
+  width: 100%;
+  height: 1016px;
+  overflow: hidden;
+  text-align: left;
+  font-size: 60px;
+  color: var(--color-gray-100);
+  font-family: var(--font-hammersmith-one);
+}
