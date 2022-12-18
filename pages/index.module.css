@@ -1,0 +1,23 @@
+.darkTheme {
+  color: white;
+  background-color: #3e3535;
+  background-image: url(/background-icon-tide-dark-theme.png);
+  position: absolute;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 10;
+}
+
+.whiteTheme {
+  background-image: url(/background-icon-tide-white-theme.png);
+  position: absolute;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin: 10;
+  color: black;
+}
+
