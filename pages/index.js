@@ -1,75 +1,48 @@
-import React, { useState } from "react";
-import Link from "next/link";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
-import DarkModeToggleButton from "../components/DarkModeToggleButton";
+import Header from "../components/layout/Header";
 
-function Index() {
-  const [theme, setTheme] = useState("white");
+import { createClient } from "@supabase/supabase-js";
+
+import { login, logout } from "../redux/actions/authActions";
+import { clearErrors } from "../redux/actions/errorActions";
+import { connect } from "react-redux";
+
+const supabase = createClient(
+  "https://gimixnmwbsefltaxnvsp.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
+);
+function Index(props) {
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  async function getUser() {
+    await supabase.auth.getUser().then((value) => {
+      console.log("VALUE", value);
+      if (value.data?.user) {
+        props.login({
+          full_name: value.data.user.user_metadata.full_name,
+          email: value.data.user.user_metadata.email,
+          role: value.data.user.role,
+          picture: value.data.user.user_metadata.picture,
+          email_verified: value.data.user.user_metadata.email_verified,
+        });
+      }
+    });
+  }
   return (
     <>
       {/* put background image here */}
-      <div className={theme === "dark" ? styles.darkTheme : styles.whiteTheme}>
+      <div
+        className={
+          props.server.theme === "dark" ? styles.darkTheme : styles.whiteTheme
+        }
+      >
         {/* header */}
-        <div
-          style={{
-            display: "flex",
-            margin: "20px 40px 0 30px",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* logo */}
-          <div>
-            <Image src="/logo-tide.png" alt="logo" width={132} height={32} />
-          </div>
-          <DarkModeToggleButton theme={theme} setTheme={setTheme} />
-          {/* right side <a> tags */}
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Link
-              href="/"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 40,
-              }}
-            >
-              Features
-            </Link>
 
-            <Link
-              href="/authentication/login"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 20,
-              }}
-            >
-              Log in
-            </Link>
-
-            <div
-              style={{
-                borderLeft: "1px solid #1BF0A2",
-                height: 35,
-                marginRight: 12,
-              }}
-            ></div>
-
-            <Link
-              href="/authentication/signup"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 15,
-              }}
-            >
-              sign up
-            </Link>
-
-            <div style={{ borderLeft: "1px solid #1BF0A2", height: 35 }}></div>
-          </div>
-        </div>
-
+        <Header />
         {/* mid part of page */}
         <div style={{ display: "flex", margin: "40px 22px" }}>
           {/* font */}
@@ -116,6 +89,9 @@ function Index() {
                 padding: 10,
                 borderWidth: 0,
                 marginLeft: 20,
+                cursor: "pointer",
+            boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
+
               }}
             >
               <b>SIGN UP FREE</b>
@@ -145,20 +121,27 @@ function Index() {
           right: 0,
         }}
       ></div>
-      {theme === "dark" && 
-      <div
-      style={{
-        width: 0,
-        height: 0,
-        borderBottom: "100px solid rgb(1, 82, 72)",
-        borderRight: "100px solid transparent",
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-      }}
-    ></div>}
+      {props.server.theme === "dark" && (
+        <div
+          style={{
+            width: 0,
+            height: 0,
+            borderBottom: "100px solid rgb(1, 82, 72)",
+            borderRight: "100px solid transparent",
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+          }}
+        ></div>
+      )}
     </>
   );
 }
 
-export default Index;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  error: state.error.error,
+  server: state.server,
+});
+
+export default connect(mapStateToProps, { login, logout, clearErrors })(Index);
