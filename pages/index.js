@@ -20,7 +20,6 @@ function Index(props) {
 
   async function getUser() {
     await supabase.auth.getUser().then((value) => {
-      console.log("VALUE", value);
       if (value.data?.user) {
         props.login({
           full_name: value.data.user.user_metadata.full_name,
@@ -90,8 +89,7 @@ function Index(props) {
                 borderWidth: 0,
                 marginLeft: 20,
                 cursor: "pointer",
-            boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
-
+                boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
               }}
             >
               <b>SIGN UP FREE</b>

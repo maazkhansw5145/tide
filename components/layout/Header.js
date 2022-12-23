@@ -16,7 +16,6 @@ function Header(props) {
   );
   const logout = () => {
     supabase.auth.signOut();
-
     props.logout();
   };
   return (
@@ -31,10 +30,15 @@ function Header(props) {
       <div>
         <Image src="/logo-tide.png" alt="logo" width={132} height={32} />
       </div>
+      <div 
+        style={{marginLeft:'auto'}}
+      
+      >
       <DarkModeToggleButton
         theme={props.server.theme}
         setTheme={props.changeTheme}
       />
+      </div>
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
         {router.pathname === "/" && props.auth.isAuthenticated && (
