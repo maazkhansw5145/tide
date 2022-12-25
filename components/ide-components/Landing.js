@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CodeEditorWindow from "./CodeEditorWindow";
 import axios from "axios";
-import { classnames } from "../../utils/general";
+import { classnames } from "../../utils/general.js";
 import { languageOptions } from "../../constants/languageOptions";
 
 import { ToastContainer, toast } from "react-toastify";

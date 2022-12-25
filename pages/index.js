@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 import Header from "../components/layout/Header";
-
+import CodeEditorWindow from "../components/ide-components/CodeEditorWindow";
 import { createClient } from "@supabase/supabase-js";
 
 import { login, logout } from "../redux/actions/authActions";
@@ -96,14 +96,15 @@ function Index(props) {
             </button>
           </div>
           {/* coding image */}
-          <div>
-            <Image
+          <div style={{width: 635, height: 315, marginTop: 30}}>
+            <CodeEditorWindow />
+            {/* <Image
               src="/coding-screen.png"
               alt="coding screen"
               width={635}
               height={315}
               style={{ marginTop: 30 }}
-            />
+            /> */}
           </div>
         </div>
         {/* Polygon */}
