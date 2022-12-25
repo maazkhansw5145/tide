@@ -7,7 +7,6 @@ import { changeTheme } from "../../redux/actions/serverActions";
 import { logout } from "../../redux/actions/authActions";
 import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
-
 function Header(props) {
   const router = useRouter();
   const supabase = createClient(
@@ -16,7 +15,6 @@ function Header(props) {
   );
   const logout = () => {
     supabase.auth.signOut();
-
     props.logout();
   };
   return (
@@ -31,10 +29,12 @@ function Header(props) {
       <div>
         <Image src="/logo-tide.png" alt="logo" width={132} height={32} />
       </div>
-      <DarkModeToggleButton
-        theme={props.server.theme}
-        setTheme={props.changeTheme}
-      />
+      <div style={{ marginLeft: "auto" }}>
+        <DarkModeToggleButton
+          theme={props.server.theme}
+          setTheme={props.changeTheme}
+        />
+      </div>
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
         {router.pathname === "/" && props.auth.isAuthenticated && (

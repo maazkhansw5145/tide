@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { createClient } from "@supabase/supabase-js";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -21,9 +22,28 @@ function NewPassword() {
       })
       .then(() => {
         setSuccess(true);
+        toast.success("Password Changes Successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       })
       .catch((e) => {
-        alert("Ooops! Error");
+        toast.error("Oops! Failed to change password", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
     // }
   };

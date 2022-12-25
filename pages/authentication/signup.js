@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -30,8 +31,30 @@ function Signup() {
         } else {
           setEmailSent(true);
           setLoading(false);
+          toast.success("Verification Email Send", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
         setLogging(false);
+      })
+      .catch(() => {
+        toast.error("Ooops! Error: Failed to signup", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   };
 

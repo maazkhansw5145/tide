@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -20,12 +21,21 @@ function Forgot(props) {
         redirectTo: "http://localhost:3000/authentication/new_password",
       })
       .then((res) => {
-        console.log(res);
         setLoading(false);
         if (res?.error) {
           setError("Invalid email id");
         } else {
           setDone(true);
+          toast.success("Password Reset Link Sent Successfully via Email", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          });
         }
         // if (res.data?.user) {
         //   setLoading(true);
@@ -34,6 +44,18 @@ function Forgot(props) {
         //     role: res.data.user.role,
         //   });
         // }
+      })
+      .catch(() => {
+        toast.error("Ooops! Failed to reset password", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
       });
   };
 
