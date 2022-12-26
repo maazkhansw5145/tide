@@ -38,7 +38,7 @@ export const login = (data) => (dispatch) => {
 };
 
 // Logout User
-export const logout = () => {
+export const logout = () => (dispatch) =>{
   dispatch({
     type: LOGOUT_SUCCESS,
   });

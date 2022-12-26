@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useEffect } from "react";
 import styles from "./index.module.css";
 import Header from "../components/layout/Header";
 
@@ -8,6 +7,8 @@ import { createClient } from "@supabase/supabase-js";
 import { login, logout } from "../redux/actions/authActions";
 import { clearErrors } from "../redux/actions/errorActions";
 import { connect } from "react-redux";
+
+import CodeEditorWindow from "../components/ide/CodeEditorWindow";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -96,14 +97,15 @@ function Index(props) {
             </button>
           </div>
           {/* coding image */}
-          <div>
-            <Image
+          <div style={{ width: 635, height: 345}}>
+            <CodeEditorWindow />
+            {/* <Image
               src="/coding-screen.png"
               alt="coding screen"
               width={635}
               height={315}
               style={{ marginTop: 30 }}
-            />
+            /> */}
           </div>
         </div>
         {/* Polygon */}
