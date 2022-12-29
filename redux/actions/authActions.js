@@ -3,38 +3,32 @@ import url from "../../config/URL";
 import { toast } from "react-toastify";
 
 export const login = (data) => (dispatch) => {
-  console.log(data);
-  // LOG IN API CALL
-  // Login with password will only gives email and role
-  // email
-  // role
-
-  // full_name
-  // picture
-  // email_verified
-
-  // fetch(`${url}/user/save`, {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ data: data }),
-  //   });
-  dispatch({
-    type: LOGIN_SUCCESS,
-    payload: data,
-  });
-  toast.success("Logged in successfully", {
-    position: "top-center",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-    theme: "colored",
-  });
+  fetch(`${url}/api/user/login`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data: data }),
+    }).then((response) => {
+      response.json().then((user) => {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: user,
+        });
+      })
+    }).catch((e) => {
+      toast.error("Oops! Failed to login", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+    })
 };
 
 // Logout User

@@ -8,7 +8,10 @@ import { login, logout } from "../redux/actions/authActions";
 import { clearErrors } from "../redux/actions/errorActions";
 import { connect } from "react-redux";
 
+import { toast } from "react-toastify";
+
 import CodeEditorWindow from "../components/ide/CodeEditorWindow";
+import Link from "next/link";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -16,18 +19,29 @@ const supabase = createClient(
 );
 function Index(props) {
   useEffect(() => {
-    getUser();
+    if (!props.auth.isAuthenticated) {
+      getUser();
+    }
   }, []);
 
   async function getUser() {
     await supabase.auth.getUser().then((value) => {
       if (value.data?.user) {
         props.login({
-          full_name: value.data.user.user_metadata.full_name,
-          email: value.data.user.user_metadata.email,
-          role: value.data.user.role,
-          picture: value.data.user.user_metadata.picture,
+          name: value.data.user.user_metadata.full_name,
+          emailId: value.data.user.user_metadata.email,
+          picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
+        });
+        toast.success("Logged in successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
         });
       }
     });
@@ -82,7 +96,7 @@ function Index(props) {
               Tide is a Technical Interview Development Environment to conduct
               assessments through live and asynchronous collaborative coding.
             </p>
-            <button
+            <Link
               style={{
                 background: "#F78F95",
                 borderRadius: 4,
@@ -92,12 +106,13 @@ function Index(props) {
                 cursor: "pointer",
                 boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
               }}
+              href="/authentication/signup"
             >
               <b>SIGN UP FREE</b>
-            </button>
+            </Link>
           </div>
           {/* coding image */}
-          <div style={{ width: 635, height: 345}}>
+          <div style={{ width: 635, height: 345 }}>
             <CodeEditorWindow />
             {/* <Image
               src="/coding-screen.png"

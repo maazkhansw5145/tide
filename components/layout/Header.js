@@ -13,8 +13,8 @@ function Header(props) {
     "https://gimixnmwbsefltaxnvsp.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
   );
-  const logout = () => {
-    supabase.auth.signOut();
+  const logout = async () => {
+    await supabase.auth.signOut();
     props.logout();
   };
   return (
@@ -37,18 +37,20 @@ function Header(props) {
       </div>
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
-        {router.pathname === "/" && props.auth.isAuthenticated && (
-          <Link
-            href="/ide"
-            style={{
-              fontWeight: 500,
-              fontSize: 16,
-              marginRight: 40,
-            }}
-          >
-            IDE
-          </Link>
-        )}
+        {router.pathname === "/" &&
+          props.auth.isAuthenticated &&
+          props.auth.user?.premium && (
+            <Link
+              href="/ide"
+              style={{
+                fontWeight: 500,
+                fontSize: 16,
+                marginRight: 40,
+              }}
+            >
+              IDE
+            </Link>
+          )}
         {router.pathname !== "/" && (
           <Link
             href="/"
@@ -61,19 +63,20 @@ function Header(props) {
             Home Page
           </Link>
         )}
+        {!props.auth.user?.premium && router.pathname !== "/payment" && (
+          <Link
+            href="/payment"
+            style={{
+              fontWeight: 500,
+              fontSize: 16,
+              marginRight: 40,
+            }}
+          >
+            Features
+          </Link>
+        )}
         {!props.auth.isAuthenticated ? (
           <>
-            <Link
-              href="/"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 40,
-              }}
-            >
-              Features
-            </Link>
-
             <Link
               href="/authentication/login"
               style={{
