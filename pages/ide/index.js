@@ -20,7 +20,7 @@ function Ide(props) {
       style={{width:'100%'}}
     >
       <Header />
-      <h1 style={{marginLeft:40}}>Welcome to IDE</h1>
+      <Landing />
     </div>
   );
 }
