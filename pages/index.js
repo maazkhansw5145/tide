@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import Image from "next/image";
+import React, { useEffect } from "react";
 import styles from "./index.module.css";
 import Header from "../components/layout/Header";
 import CodeEditorWindow from "../components/ide-components/CodeEditorWindow";
@@ -9,24 +8,40 @@ import { login, logout } from "../redux/actions/authActions";
 import { clearErrors } from "../redux/actions/errorActions";
 import { connect } from "react-redux";
 
+import { toast } from "react-toastify";
+
+import CodeEditorWindow from "../components/ide/CodeEditorWindow";
+import Link from "next/link";
+
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
 );
 function Index(props) {
   useEffect(() => {
-    getUser();
+    if (!props.auth.isAuthenticated) {
+      getUser();
+    }
   }, []);
 
   async function getUser() {
     await supabase.auth.getUser().then((value) => {
       if (value.data?.user) {
         props.login({
-          full_name: value.data.user.user_metadata.full_name,
-          email: value.data.user.user_metadata.email,
-          role: value.data.user.role,
-          picture: value.data.user.user_metadata.picture,
+          name: value.data.user.user_metadata.full_name,
+          emailId: value.data.user.user_metadata.email,
+          picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
+        });
+        toast.success("Logged in successfully", {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
         });
       }
     });
@@ -81,7 +96,7 @@ function Index(props) {
               Tide is a Technical Interview Development Environment to conduct
               assessments through live and asynchronous collaborative coding.
             </p>
-            <button
+            <Link
               style={{
                 background: "#F78F95",
                 borderRadius: 4,
@@ -91,12 +106,17 @@ function Index(props) {
                 cursor: "pointer",
                 boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
               }}
+              href="/authentication/signup"
             >
               <b>SIGN UP FREE</b>
-            </button>
+            </Link>
           </div>
           {/* coding image */}
+<<<<<<< HEAD
           <div style={{width: 635, height: 315, marginTop: 30}}>
+=======
+          <div style={{ width: 635, height: 345 }}>
+>>>>>>> 41a0406a8216a0e66f725a63559829e2302a3e78
             <CodeEditorWindow />
             {/* <Image
               src="/coding-screen.png"

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import GoogleIcon from "@mui/icons-material/Google";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { createClient } from "@supabase/supabase-js";
+import { toast } from "react-toastify";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -23,7 +24,17 @@ function Login(props) {
   const router = useRouter();
   useEffect(() => {
     if (props.auth.msg === "Login Successfully") {
-      router.push("/ide");
+      toast.success("Logged in successfully", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+      });
+      router.push("/");
     }
   }, [props.auth.msg]);
 
@@ -41,19 +52,21 @@ function Login(props) {
         if (res.data?.user) {
           setLoading(true);
           props.login({
-            email: res.data.user.email,
-            role: res.data.user.role,
+            emailId: res.data.user.email,
+            userId: res.data.user.id,
+            email_verified: true
           });
         }
         setLogging(false);
       });
   };
 
-  const loginWithGoogle = () => {
-    supabase.auth.signInWithOAuth({
+  const loginWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
       provider: "google",
     });
   };
+
   if (loading) {
     return <Loading />;
   }
@@ -189,7 +202,7 @@ function Login(props) {
         >
           {logging ? "Working..." : "Log in"}
         </button>
-        <div style={{ marginTop: 15, display: "flex", justifyContent: "end" }}>
+        <div style={{ marginTop: 20, display: "flex", justifyContent: "end" }}>
           <Link
             href="/authentication/forgot"
             style={{
@@ -204,7 +217,7 @@ function Login(props) {
         </div>
 
         <div
-          style={{ marginTop: 25, display: "flex", justifyContent: "center" }}
+          style={{ marginTop: 20, display: "flex", justifyContent: "center" }}
         >
           <Link
             href="/authentication/signup"
