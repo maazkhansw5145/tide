@@ -3,6 +3,7 @@ import UserSchema from "../../../models/UserSchema";
 
 export default function premium(req, res) {
   if (req.method === "POST") {
+    console.log(req.body)
     MongodbConnect();
     UserSchema.findOneAndUpdate(
       { emailId: req.body.emailId },

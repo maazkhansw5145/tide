@@ -7,32 +7,34 @@ import { createClient } from "@supabase/supabase-js";
 import { login, logout } from "../redux/actions/authActions";
 import { clearErrors } from "../redux/actions/errorActions";
 import { connect } from "react-redux";
-
+import url from "../config/URL";
 import { toast } from "react-toastify";
 
-import CodeEditorWindow from "../components/ide/CodeEditorWindow";
 import Link from "next/link";
 
-const supabase = createClient(
-  "https://gimixnmwbsefltaxnvsp.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
-);
 function Index(props) {
   useEffect(() => {
+    console.log(props.auth.isAuthenticated)
     if (!props.auth.isAuthenticated) {
-      getUser();
+      checkUser();
     }
   }, []);
 
-  async function getUser() {
-    await supabase.auth.getUser().then((value) => {
+  async function checkUser() {
+    const supabase = createClient(
+      "https://gimixnmwbsefltaxnvsp.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
+    );
+    await supabase.auth.getUser().then(async (value) => {
       if (value.data?.user) {
-        props.login({
+        console.log("SEND LOGIN REQuest")
+        await props.login({
           name: value.data.user.user_metadata.full_name,
           emailId: value.data.user.user_metadata.email,
           picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
         });
+        console.log("REuest done")
         toast.success("Logged in successfully", {
           position: "top-center",
           autoClose: 5000,
@@ -58,6 +60,15 @@ function Index(props) {
 
         <Header />
         {/* mid part of page */}
+        <button onClick={() =>{
+        fetch(`${url}/api/hello`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => console.log(res)).catch((e) => console.log(e))
+      }}>Check api</button>
         <div style={{ display: "flex", margin: "40px 22px" }}>
           {/* font */}
           <div>
@@ -112,11 +123,7 @@ function Index(props) {
             </Link>
           </div>
           {/* coding image */}
-<<<<<<< HEAD
-          <div style={{width: 635, height: 315, marginTop: 30}}>
-=======
           <div style={{ width: 635, height: 345 }}>
->>>>>>> 41a0406a8216a0e66f725a63559829e2302a3e78
             <CodeEditorWindow />
             {/* <Image
               src="/coding-screen.png"

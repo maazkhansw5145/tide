@@ -7,7 +7,7 @@ import Link from "next/link";
 import styles from "../index.module.css";
 import Header from "../../components/layout/Header";
 import { connect } from "react-redux";
-import { login } from "../../redux/actions/authActions";
+import { premium } from "../../redux/actions/authActions";
 import { toast } from "react-toastify";
 
 function Success(props) {
@@ -17,10 +17,12 @@ function Success(props) {
   useEffect(() => {
     verifySessionId();
   }, []);
+
   const router = useRouter();
 
   const verifySessionId = async () => {
     const session_id = router.query.session_id;
+    console.log("Session Id",session_id)
     if (session_id) {
       const subscription_type = router.query.type;
       fetch(`https://api.stripe.com/v1/checkout/sessions/${session_id}`, {
@@ -33,37 +35,41 @@ function Success(props) {
         },
       }).then((response) => {
         if (response.status === 200) {
+          console.log("respons1",response)
           response.json().then((user) => {
+            console.log(user)
             var date = new Date();
-            fetch(`${url}/api/user/premium`, {
+            const newUser = {
+              emailId: user.customer_details.email,
+              name: user.customer_details.name,
+              premium_session_id: session_id,
+              status: "Premium user",
+              premium_package_type:
+                subscription_type === "sme"
+                  ? "Small Medium Enterprise"
+                  : subscription_type === "ft"
+                  ? "Full Time"
+                  : "Monthly Subscription",
+              premium_bought_at: date,
+              premium_expires_at:
+                subscription_type === "ft"
+                  ? "Never"
+                  : date.setDate(date.getDate() + 30),
+            }
+            fetch(`http://www.localhost:3000/api/user/premium`, {
               method: "POST",
               headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
               },
-              body: JSON.stringify({
-                emailId: user.customer_details.email,
-                name: user.customer_details.name,
-                premium_session_id: session_id,
-                status: "Premium user",
-                premium_package_type:
-                  subscription_type === "sme"
-                    ? "Small Medium Enterprise"
-                    : subscription_type === "ft"
-                    ? "Full Time"
-                    : "Monthly Subscription",
-                premium_bought_at: date,
-                premium_expires_at:
-                  subscription_type === "ft"
-                    ? "Never"
-                    : date.setDate(date.getDate() + 30),
-              }),
+              body: JSON.stringify(newUser),
             })
               .then((response1) => {
-                response1
-                  .json()
-                  .then((response2) => {
-                    props.login(response2);
+                console.log("Final response",response1)
+                // response1
+                //   .json()
+                //   .then((response2) => {
+                    props.premium(newUser);
                     setLoading(false);
                     setSuccess(true);
                     toast.success("Premium Bought successfully", {
@@ -76,21 +82,22 @@ function Success(props) {
                       progress: undefined,
                       theme: "colored",
                     });
-                  })
-                  .catch(() => {
-                    toast.error("Oops! failed to update user, login again", {
-                      position: "top-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "colored",
-                    });
-                  });
+                  // })
+                  
               })
-              .catch((e) => console.log(e));
+              .catch((e) => {
+                console.log(e)
+                toast.error("Oops! failed to update, login again", {
+                  position: "top-center",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+                });
+              });
           });
         } else {
           setLoading(false);
@@ -113,7 +120,15 @@ function Success(props) {
       style={{ width: "100%" }}
     >
       <Header />
-
+      <button onClick={() =>{
+        fetch(`http://www.localhost:3000/api/hello`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => console.log(res)).catch((e) => console.log(e))
+      }}>Check api</button>
       <div
         style={{ color: "black", width: "60%", margin: "100px auto 0 auto" }}
       >
@@ -245,4 +260,4 @@ const mapStateToProps = (state) => ({
   server: state.server,
 });
 
-export default connect(mapStateToProps, { login })(Success);
+export default connect(mapStateToProps, { premium })(Success);

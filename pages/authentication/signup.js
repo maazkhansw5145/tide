@@ -25,6 +25,7 @@ function Signup() {
         password,
       })
       .then((res) => {
+        console.log(res)
         if (res.error?.status === 422) {
           setError("Enter valid email id, please!");
         } else {

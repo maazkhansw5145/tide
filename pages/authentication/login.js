@@ -8,6 +8,7 @@ import GoogleIcon from "@mui/icons-material/Google";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { createClient } from "@supabase/supabase-js";
 import { toast } from "react-toastify";
+import url from "../../config/URL";
 
 const supabase = createClient(
   "https://gimixnmwbsefltaxnvsp.supabase.co",
@@ -23,18 +24,22 @@ function Login(props) {
   const [error, setError] = useState(false);
   const router = useRouter();
   useEffect(() => {
+    console.log(props.auth)
     if (props.auth.msg === "Login Successfully") {
-      toast.success("Logged in successfully", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      // toast.success("Logged in successfully", {
+      //   position: "top-center",
+      //   autoClose: 5000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "colored",
+      // });
       router.push("/");
+    } else if(props.auth.msg === "Login Fails"){
+      setLoading(false);
+      setLogging(false);
     }
   }, [props.auth.msg]);
 
@@ -98,6 +103,15 @@ function Login(props) {
         <div style={{ borderLeft: "1px solid black", height: 65,margin:"0 15px" }}></div>
 
       </div>
+      <button onClick={() =>{
+        fetch(`${url}/api/hello`, {
+          method: "GET",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then((res) => console.log(res)).catch((e) => console.log(e))
+      }}>Check api</button>
       <div style={{ width: "50%", margin: "auto" }}>
         <div style={{ margin: "40px 0 20px 0" }}>
           <button

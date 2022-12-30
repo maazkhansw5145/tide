@@ -28,8 +28,4 @@ const useKeyPress = function (targetKey) {
   return keyPressed;
 };
 
-<<<<<<< HEAD
 export default useKeyPress;
-=======
-export default useKeyPress;
->>>>>>> 41a0406a8216a0e66f725a63559829e2302a3e78

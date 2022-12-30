@@ -3,6 +3,7 @@ import {
     LOGIN_FAIL,
     LOGOUT_SUCCESS,
     CLEAR_AUTH_MSG,
+    PREMIUM_BOUGHT
   } from "../Types";
   
   const initialState = {
@@ -21,7 +22,20 @@ import {
           msg: "Login Successfully",
           user: action.payload,
         };
+        case PREMIUM_BOUGHT:
+        return {
+          ...state,
+          isAuthenticated: true,
+          msg: "Premium Bought Successfully",
+          user: action.payload,
+        };
       case LOGIN_FAIL:
+        return {
+          ...state,
+          isAuthenticated: false,
+          msg: "Login Fails",
+          user: null,
+        };
       case LOGOUT_SUCCESS:
       case CLEAR_AUTH_MSG:
         return {

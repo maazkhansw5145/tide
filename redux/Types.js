@@ -5,3 +5,4 @@ export const CLEAR_AUTH_MSG = "CLEAR_AUTH_MSG";
 export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const CHANGE_THEME = "CHANGE_THEME";
+export const PREMIUM_BOUGHT = "PREMIUM_BOUGHT";
