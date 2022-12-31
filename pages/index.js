@@ -14,7 +14,7 @@ import Link from "next/link";
 
 function Index(props) {
   useEffect(() => {
-    console.log(props.auth.isAuthenticated)
+    console.log(props.auth.isAuthenticated);
     if (!props.auth.isAuthenticated) {
       checkUser();
     }
@@ -26,15 +26,14 @@ function Index(props) {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdpbWl4bm13YnNlZmx0YXhudnNwIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzA4MTkxMzYsImV4cCI6MTk4NjM5NTEzNn0.xNg5W4WRoLkcqO9Vc7TCa3ZG5OL7ZL6FQrUv-8Lxi7o"
     );
     await supabase.auth.getUser().then(async (value) => {
+      cosnole.log(value)
       if (value.data?.user) {
-        console.log("SEND LOGIN REQuest")
         await props.login({
           name: value.data.user.user_metadata.full_name,
           emailId: value.data.user.user_metadata.email,
           picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
         });
-        console.log("REuest done")
         toast.success("Logged in successfully", {
           position: "top-center",
           autoClose: 5000,
@@ -60,15 +59,7 @@ function Index(props) {
 
         <Header />
         {/* mid part of page */}
-        <button onClick={() =>{
-        fetch(`${url}/api/hello`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }).then((res) => console.log(res)).catch((e) => console.log(e))
-      }}>Check api</button>
+
         <div style={{ display: "flex", margin: "40px 22px" }}>
           {/* font */}
           <div>

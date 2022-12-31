@@ -21,10 +21,11 @@ function Success(props) {
   const router = useRouter();
 
   const verifySessionId = async () => {
-    const session_id = router.query.session_id;
-    console.log("Session Id",session_id)
+    const session_id = router.asPath.split("=")[2];
+
     if (session_id) {
-      const subscription_type = router.query.type;
+      let a = router.asPath.split("=")[1];
+      const subscription_type = a.split("&")[0];
       fetch(`https://api.stripe.com/v1/checkout/sessions/${session_id}`, {
         method: "GET",
         headers: {
@@ -35,9 +36,7 @@ function Success(props) {
         },
       }).then((response) => {
         if (response.status === 200) {
-          console.log("respons1",response)
           response.json().then((user) => {
-            console.log(user)
             var date = new Date();
             const newUser = {
               emailId: user.customer_details.email,
@@ -55,7 +54,7 @@ function Success(props) {
                 subscription_type === "ft"
                   ? "Never"
                   : date.setDate(date.getDate() + 30),
-            }
+            };
             fetch(`http://www.localhost:3000/api/user/premium`, {
               method: "POST",
               headers: {
@@ -65,28 +64,21 @@ function Success(props) {
               body: JSON.stringify(newUser),
             })
               .then((response1) => {
-                console.log("Final response",response1)
-                // response1
-                //   .json()
-                //   .then((response2) => {
-                    props.premium(newUser);
-                    setLoading(false);
-                    setSuccess(true);
-                    toast.success("Premium Bought successfully", {
-                      position: "top-center",
-                      autoClose: 5000,
-                      hideProgressBar: false,
-                      closeOnClick: true,
-                      pauseOnHover: true,
-                      draggable: true,
-                      progress: undefined,
-                      theme: "colored",
-                    });
-                  // })
-                  
+                props.premium(newUser);
+                setLoading(false);
+                setSuccess(true);
+                toast.success("Premium Bought successfully", {
+                  position: "top-center",
+                  autoClose: 5000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  progress: undefined,
+                  theme: "colored",
+                });
               })
               .catch((e) => {
-                console.log(e)
                 toast.error("Oops! failed to update, login again", {
                   position: "top-center",
                   autoClose: 5000,
@@ -120,15 +112,7 @@ function Success(props) {
       style={{ width: "100%" }}
     >
       <Header />
-      <button onClick={() =>{
-        fetch(`http://www.localhost:3000/api/hello`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }).then((res) => console.log(res)).catch((e) => console.log(e))
-      }}>Check api</button>
+
       <div
         style={{ color: "black", width: "60%", margin: "100px auto 0 auto" }}
       >

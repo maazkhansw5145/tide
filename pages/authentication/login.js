@@ -24,7 +24,7 @@ function Login(props) {
   const [error, setError] = useState(false);
   const router = useRouter();
   useEffect(() => {
-    console.log(props.auth)
+    console.log(props.auth);
     if (props.auth.msg === "Login Successfully") {
       // toast.success("Logged in successfully", {
       //   position: "top-center",
@@ -37,7 +37,7 @@ function Login(props) {
       //   theme: "colored",
       // });
       router.push("/");
-    } else if(props.auth.msg === "Login Fails"){
+    } else if (props.auth.msg === "Login Fails") {
       setLoading(false);
       setLogging(false);
     }
@@ -59,7 +59,7 @@ function Login(props) {
           props.login({
             emailId: res.data.user.email,
             userId: res.data.user.id,
-            email_verified: true
+            email_verified: true,
           });
         }
         setLogging(false);
@@ -86,10 +86,11 @@ function Login(props) {
         }}
       >
         <h3 style={{ margin: "20px auto" }}>Tide</h3>
-        <div style={{ borderLeft: "1px solid black", height: 65,marginRight:15 }}></div>
+        <div
+          style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
+        ></div>
 
         <div style={{ margin: "auto 0" }}>
-          
           <Link
             href="/"
             style={{
@@ -98,20 +99,17 @@ function Login(props) {
             }}
           >
             Home Page
-          </Link>        
+          </Link>
         </div>
-        <div style={{ borderLeft: "1px solid black", height: 65,margin:"0 15px" }}></div>
-
+        <div
+          style={{
+            borderLeft: "1px solid black",
+            height: 65,
+            margin: "0 15px",
+          }}
+        ></div>
       </div>
-      <button onClick={() =>{
-        fetch(`${url}/api/hello`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }).then((res) => console.log(res)).catch((e) => console.log(e))
-      }}>Check api</button>
+
       <div style={{ width: "50%", margin: "auto" }}>
         <div style={{ margin: "40px 0 20px 0" }}>
           <button
@@ -124,6 +122,7 @@ function Login(props) {
               borderRadius: 18,
               cursor: "pointer",
               borderWidth: 0,
+              boxShadow:'1px 2px 5px -1px rgb(0 0 0);'
             }}
             onClick={() => loginWithGoogle()}
           >
@@ -241,7 +240,8 @@ function Login(props) {
               color: "rgb(62, 53, 53)",
             }}
           >
-            Not signed up yet? <span style={{color:'blueviolet'}}>Sign Up</span>
+            Not signed up yet?{" "}
+            <span style={{ color: "blueviolet" }}>Sign Up</span>
           </Link>
         </div>
       </div>
