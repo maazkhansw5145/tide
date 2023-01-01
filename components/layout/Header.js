@@ -26,9 +26,9 @@ function Header(props) {
       }}
     >
       {/* logo */}
-      <div>
+      <Link href="/">
         <Image src="/logo-tide.png" alt="logo" width={132} height={32} />
-      </div>
+      </Link>
       <div style={{ marginLeft: "auto" }}>
         <DarkModeToggleButton
           theme={props.server.theme}
@@ -97,7 +97,7 @@ function Header(props) {
             ></div>
 
             <Link
-              href="/authentication/signup"
+              href="/authentication/auth_select"
               style={{
                 fontWeight: 500,
                 fontSize: 16,

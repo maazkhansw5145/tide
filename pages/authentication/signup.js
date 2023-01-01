@@ -70,7 +70,9 @@ function Signup() {
           color: "white",
         }}
       >
+        <Link href="/">
         <h3>Tide</h3>
+        </Link>
       </div>
 
       <div style={{ width: "50%", margin: "auto" }}>
