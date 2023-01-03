@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const supabase = createClient(
   "https://qubvoqsgnorlsylveylr.supabase.co",
@@ -16,7 +17,10 @@ function Signup() {
   const [error, setError] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
   const [logging, setLogging] = useState(false);
-
+  const router = useRouter();
+  useEffect(()=>{
+    console.log("Router Query", router.query);
+  }, [])
   const signup = () => {
     setLogging(true);
     supabase.auth
@@ -41,6 +45,9 @@ function Signup() {
             progress: undefined,
             theme: "colored",
           });
+          if(router.query.value == "company"){
+            router.push("/payment");
+          }
         }
         setLogging(false);
       })

@@ -2,8 +2,19 @@ import React from "react";
 import { Box, boxDefault } from "@mui/system";
 import { Button } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const AuthSelect = () => {
+const AuthSelect = (props) => {
+  const navigation = useRouter();
+  
+  const navigateAsCompany = () => {
+    navigation.push({pathname: "/authentication/signup", query: {value: "company"}})
+  }
+
+  const navigateAsDev = () => {
+    navigation.push({pathname: "/authentication/signup", query: {value: "dev"}})
+  }
+ 
   return (
     <>
     <div
@@ -28,13 +39,11 @@ const AuthSelect = () => {
         alignItems="column"
         sx={boxDefault}
       >
-        <Link href="/authentication/signup">
-        <Button variant="contained" color="secondary" sx={{marginTop:15, borderRadius:8, height: 60, width: 460 }}>
+        <Button onClick={navigateAsCompany} value="company" variant="contained" color="secondary" sx={{marginTop:15, borderRadius:8, height: 60, width: 460 }}>
           Register as a Company
         </Button>
-        </Link>
         <Link href="/authentication/signup">
-        <Button variant="contained" color="primary" sx={{marginTop:5, borderRadius:8, height: 60, width: 460 }}>
+        <Button onClick={navigateAsDev} value="dev" variant="contained" color="primary" sx={{marginTop:5, borderRadius:8, height: 60, width: 460 }}>
           Register as a Developer
         </Button>
         </Link>
