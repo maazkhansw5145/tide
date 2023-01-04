@@ -1,12 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import DarkModeToggleButton from "../DarkModeToggleButton";
+import  DarkModeToggleButton from "../DarkModeToggleButton";
 import { connect } from "react-redux";
 import { changeTheme } from "../../redux/actions/serverActions";
 import { logout } from "../../redux/actions/authActions";
 import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
+
 function Header(props) {
   const router = useRouter();
   const supabase = createClient(
@@ -38,8 +39,7 @@ function Header(props) {
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
         {router.pathname === "/" &&
-          props.auth.isAuthenticated &&
-          props.auth.user?.premium && (
+          props.auth.isAuthenticated (
             <Link
               href="/ide"
               style={{
@@ -63,7 +63,7 @@ function Header(props) {
             Home Page
           </Link>
         )}
-        {!props.auth.user?.premium && router.pathname !== "/payment" && (
+        {/* {!props.auth.user?.premium && router.pathname !== "/payment" && (
           <Link
             href="/payment"
             style={{
@@ -74,7 +74,7 @@ function Header(props) {
           >
             Features
           </Link>
-        )}
+        )} */}
         {!props.auth.isAuthenticated ? (
           <>
             <Link

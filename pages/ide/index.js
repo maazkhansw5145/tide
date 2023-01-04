@@ -6,11 +6,12 @@ import { useRouter } from "next/router";
 import Landing from "../../components/ide-components/Landing";
 function Ide(props) {
   const router = useRouter();
-  useEffect(() => {
-    if (!props.auth.isAuthenticated) {
-      router.push("/");
-    }
-  }, [props.auth.isAuthenticated]);
+  const question = router.query.value;
+  // useEffect(() => {
+  //   if (!props.auth.isAuthenticated) {
+  //     router.push("/");
+  //   }
+  // }, [props.auth.isAuthenticated]);
 
   return (
     <div
@@ -20,7 +21,8 @@ function Ide(props) {
       style={{ width: "100%" }}
     >
       <Header />
-      <Landing />
+      <h2 style={{padding: '30px'}}>Your Question to solve: <span style={{color: 'blueviolet'}}>{question}</span></h2>
+      <Landing style={{paddingTop: "30px !important"}} />
     </div>
   );
 }

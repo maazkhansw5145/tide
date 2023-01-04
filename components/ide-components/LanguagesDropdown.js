@@ -6,6 +6,7 @@ import { languageOptions } from "../constants/languageOptions";
 const LanguagesDropdown = ({ onSelectChange }) => {
   return (
     <Select
+      style={{padding: "10px !important"}}
       placeholder={`Filter By Category`}
       options={languageOptions}
       styles={customStyles}
