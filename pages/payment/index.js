@@ -23,7 +23,7 @@ function Index(props) {
       style={{ width: "100%", height: "100%" }}
     >
       <Header />
-      {!props.auth.isAuthenticated ? (
+      {/* {!props.auth.isAuthenticated ? (
         <div
         style={{
           padding: 30,
@@ -69,14 +69,14 @@ function Index(props) {
           </Link>
         </div>
       </div>
-      ) : (
+      ) : ( */}
         <div style={{marginTop:20}}>
         <stripe-pricing-table
           pricing-table-id="prctbl_1MJIrhCK03JH8k6TCRP8OfXv"
           publishable-key="pk_test_51MCwf9CK03JH8k6TnsHKf6GPg7RbNsRwQmC1BPZaf9lGnfU21noTBCWuTFWuGB07dCj4lcOCOBxsk5fDIKUGdiFL00Rtu5NK42"
           ></stripe-pricing-table>
           </div>
-      )}
+      {/* )} */}
     </div>
   );
 }

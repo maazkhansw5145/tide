@@ -77,6 +77,12 @@ function Success(props) {
                   progress: undefined,
                   theme: "colored",
                 });
+                router.push({
+                  pathname: "/admin",
+                  query: {
+                    value: "premium"
+                  }
+                });
               })
               .catch((e) => {
                 toast.error("Oops! failed to update, login again", {
