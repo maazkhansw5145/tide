@@ -14,10 +14,14 @@ function Header(props) {
     "https://qubvoqsgnorlsylveylr.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
   );
+
+  
   const logout = async () => {
     await supabase.auth.signOut();
     props.logout();
   };
+console.log(props)
+
   return (
     <div
       style={{
@@ -39,7 +43,7 @@ function Header(props) {
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
         {router.pathname === "/" &&
-          props.auth.isAuthenticated (
+          props.auth.isAuthenticated && (
             <Link
               href="/ide"
               style={{

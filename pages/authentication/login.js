@@ -7,8 +7,7 @@ import { useRouter } from "next/router";
 import GoogleIcon from "@mui/icons-material/Google";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { createClient } from "@supabase/supabase-js";
-import { toast } from "react-toastify";
-import url from "../../config/URL";
+
 
 const supabase = createClient(
   "https://qubvoqsgnorlsylveylr.supabase.co",
@@ -85,7 +84,7 @@ function Login(props) {
           background: "#3e3535",
         }}
       >
-        <h3 style={{ margin: "20px auto" }}>Tide</h3>
+        <h3 style={{ margin: "20px auto",fontSize:22 }}>Tide</h3>
         <div
           style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
         ></div>
@@ -122,7 +121,8 @@ function Login(props) {
               borderRadius: 18,
               cursor: "pointer",
               borderWidth: 0,
-              boxShadow:'1px 2px 5px -1px rgb(0 0 0);'
+              boxShadow:'1px 2px 5px -1px rgb(0 0 0);',
+              padding:'15px 0'
             }}
             onClick={() => loginWithGoogle()}
           >
@@ -132,7 +132,7 @@ function Login(props) {
             </p>
           </button>
         </div>
-        <hr />
+        <hr style={{margin:'30px 0'}} />
         <div style={{ margin: "15px 0" }}>
           <label style={{ color: "black" }}>Email Address</label>
           <input
@@ -184,6 +184,9 @@ function Login(props) {
                 justifyContent: "center",
                 border: "1px solid red",
                 color: "black",
+                marginBottom:15,
+                alignItems:'center'
+
               }}
             >
               <ErrorOutlineIcon style={{ marginRight: 15 }} />

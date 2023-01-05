@@ -57,7 +57,7 @@ function NewPassword() {
           background: "#3e3535",
         }}
       >
-        <h3 style={{ margin: "20px auto" }}>Tide</h3>
+        <h3 style={{ margin: "20px auto",fontSize:22 }}>Tide</h3>
         <div
           style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
         ></div>
@@ -116,6 +116,9 @@ function NewPassword() {
                     justifyContent: "center",
                     border: "1px solid red",
                     color: "black",
+                    marginBottom:15,
+                    alignItems:'center'
+
                   }}
                 >
                   <ErrorOutlineIcon style={{ marginRight: 15 }} />

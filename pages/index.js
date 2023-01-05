@@ -26,7 +26,7 @@ function Index(props) {
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
     );
     await supabase.auth.getUser().then(async (value) => {
-      console.log(value)
+      console.log(value);
       if (value.data?.user) {
         await props.login({
           name: value.data.user.user_metadata.full_name,
@@ -66,7 +66,7 @@ function Index(props) {
             <h1
               style={{
                 margin: "0 20px",
-                fontSize: "3em",
+                fontSize: "3.8em",
               }}
             >
               <span style={{ color: "#F78F95" }}>Assess</span> tech talent{" "}
@@ -91,27 +91,44 @@ function Index(props) {
             <p
               style={{
                 fontWeight: 600,
-                fontSize: 18,
-                margin: 20,
+                fontSize: 22,
+                margin: "30px 20px",
               }}
             >
               Tide is a Technical Interview Development Environment to conduct
               assessments through live and asynchronous collaborative coding.
             </p>
-            <Link
-              style={{
-                background: "#F78F95",
-                borderRadius: 4,
-                padding: 10,
-                borderWidth: 0,
-                marginLeft: 20,
-                cursor: "pointer",
-                boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
-              }}
-              href="/authentication/signup"
-            >
-              <b>SIGN UP FREE</b>
-            </Link>
+            {props.auth.isAuthenticated ? (
+              <Link
+                style={{
+                  background: "#F78F95",
+                  borderRadius: 4,
+                  padding: 10,
+                  borderWidth: 0,
+                  marginLeft: 20,
+                  cursor: "pointer",
+                  boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
+                }}
+                href="/ide"
+              >
+                <b>Open IDE</b>
+              </Link>
+            ) : (
+              <Link
+                style={{
+                  background: "#F78F95",
+                  borderRadius: 4,
+                  padding: 10,
+                  borderWidth: 0,
+                  marginLeft: 20,
+                  cursor: "pointer",
+                  boxShadow: "0 10px 18px 0 rgb(0 0 0 / 34%",
+                }}
+                href="/authentication/signup"
+              >
+                <b>SIGN UP FREE</b>
+              </Link>
+            )}
           </div>
           {/* coding image */}
           <div style={{ width: 635, height: 345 }}>

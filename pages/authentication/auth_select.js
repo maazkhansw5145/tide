@@ -28,7 +28,7 @@ const AuthSelect = (props) => {
         }}
       >
         <Link href="/">
-        <h3>Tide</h3>
+        <h3 style={{fontSize:22}}>Tide</h3>
         </Link>
       </div>
       <Box

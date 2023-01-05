@@ -13,7 +13,7 @@ function Forgot(props) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState(true);
 
   const resetPassword = () => {
     supabase.auth
@@ -69,9 +69,11 @@ function Forgot(props) {
           justifyContent: "center",
           background: "#3e3535",
           color: "white",
+          padding:'20px 0'
+
         }}
       >
-        <h3>Tide</h3>
+        <h3 style={{fontSize:22}}>Tide</h3>
       </div>
       {done ? (
         <div
@@ -84,10 +86,10 @@ function Forgot(props) {
             padding: 40,
           }}
         >
-          <h2 style={{ color: "lightseagreen" }}>
+          <h2 style={{ color: "lightseagreen",fontSize:28,marginBottom:40 }}>
             Password Reset Link Sent Successfully!
           </h2>
-          <h4>
+          <h4 style={{margin:'20px 0',fontSize:19}}>
             Kindly, open your inbox then open then email from{" "}
             <span style={{ color: "cornflowerblue", fontStyle: "italic" }}>
               noreply@mail.app.supabase.io
@@ -113,7 +115,7 @@ function Forgot(props) {
                 borderRadius: 15,
               }}
             >
-              &larr; Login
+              &larr; &nbsp; Login
             </Link>
           </div>
         </div>
@@ -151,6 +153,9 @@ function Forgot(props) {
                   textAlign: "center",
                   display: "flex",
                   justifyContent: "center",
+                  marginBottom:15,
+                  alignItems:'center'
+
                 }}
               >
                 <ErrorOutlineIcon style={{ marginRight: 15 }} />

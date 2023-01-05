@@ -4,6 +4,7 @@ import Link from "next/link";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const supabase = createClient(
   "https://qubvoqsgnorlsylveylr.supabase.co",
@@ -21,6 +22,8 @@ function Signup() {
   useEffect(()=>{
     console.log("Router Query", router.query);
   }, [])
+
+
   const signup = () => {
     setLogging(true);
     supabase.auth
@@ -65,6 +68,12 @@ function Signup() {
       });
   };
 
+  const loginWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+    });
+  };
+
   return (
     <div>
       <div
@@ -75,11 +84,12 @@ function Signup() {
           justifyContent: "center",
           background: "#3e3535",
           color: "white",
+          padding:'20px 0'
         }}
       >
-        <Link href="/">
-        <h3>Tide</h3>
-        </Link>
+        
+        <h3 style={{fontSize:22}}>Tide</h3>
+        
       </div>
 
       <div style={{ width: "50%", margin: "auto" }}>
@@ -97,10 +107,10 @@ function Signup() {
                 color: "black",
                 fontSize: 22,
                 textAlign: "center",
-                marginBottom: 60,
+                margin: "25px 0 60px 0",
               }}
             >
-              Verification email has sent. Please! check your{" "}
+              <span style={{ color: "#DB4437" }}>Verification</span> email has sent. Please! check your{" "}
               <span style={{ color: "#DB4437" }}>inbox</span> and click on
               <span style={{ color: "blue" }}> verify</span>.
             </p>
@@ -122,6 +132,30 @@ function Signup() {
           </div>
         ) : (
           <>
+           <div style={{ margin: "40px 0 20px 0" }}>
+          <button
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              background: "#DB4437",
+              width: "100%",
+              alignItems: "center",
+              borderRadius: 18,
+              cursor: "pointer",
+              borderWidth: 0,
+              boxShadow:'1px 2px 5px -1px rgb(0 0 0);',
+              padding:'15px 0'
+            }}
+            onClick={() => loginWithGoogle()}
+          >
+            <GoogleIcon style={{ color: "white", fontSize: 28 }} />
+            <p style={{ marginLeft: 15, fontSize: 18, color: "white" }}>
+              Login With Google
+            </p>
+          </button>
+        </div>
+        <hr style={{margin:'30px 0'}} />
+
             <div style={{ margin: "15px 0" }}>
               <label style={{ color: "black" }}>Email Address</label>
               <input
@@ -173,6 +207,8 @@ function Signup() {
                     border: "1px solid red",
                     background: "#f2dddd",
                     color: "black",
+                    marginBottom:15,
+                    alignItems:'center'
                   }}
                 >
                   <ErrorOutlineIcon style={{ marginRight: 15 }} />
