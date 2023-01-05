@@ -16,8 +16,8 @@ function Header(props) {
   );
 
   
-  const logout = async () => {
-    await supabase.auth.signOut();
+  const logout = () => {
+    supabase.auth.signOut();
     props.logout();
   };
 console.log(props)
@@ -32,7 +32,7 @@ console.log(props)
     >
       {/* logo */}
       <Link href="/">
-        <Image src="/logo-tide.png" alt="logo" width={132} height={32} />
+        <Image src="/logo-tide.png" alt="logo" width={132} height={52} />
       </Link>
       <div style={{ marginLeft: "auto" }}>
         <DarkModeToggleButton

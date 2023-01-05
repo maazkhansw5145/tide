@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import styles from "./index.module.css";
 import Header from "../components/layout/Header";
 import CodeEditorWindow from "../components/ide-components/CodeEditorWindow";
@@ -9,10 +9,12 @@ import { clearErrors } from "../redux/actions/errorActions";
 import { connect } from "react-redux";
 import url from "../config/URL";
 import { toast } from "react-toastify";
-
+import Loading from "../components/Loading";
 import Link from "next/link";
 
 function Index(props) {
+  const [loading,setLoading] = useState(false)
+
   useEffect(() => {
     console.log(props.auth.isAuthenticated);
     if (!props.auth.isAuthenticated) {
@@ -21,11 +23,12 @@ function Index(props) {
   }, []);
 
   async function checkUser() {
+    setLoading(true)
     const supabase = createClient(
       "https://qubvoqsgnorlsylveylr.supabase.co",
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
     );
-    await supabase.auth.getUser().then(async (value) => {
+    await supabase.auth.getUser().then(async(value) => {
       console.log(value);
       if (value.data?.user) {
         await props.login({
@@ -34,6 +37,7 @@ function Index(props) {
           picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
         });
+        setLoading(false)
         toast.success("Logged in successfully", {
           position: "top-center",
           autoClose: 5000,
@@ -44,8 +48,13 @@ function Index(props) {
           progress: undefined,
           theme: "colored",
         });
+      } else {
+        setLoading(false)
       }
     });
+  }
+  if(loading){
+    return <Loading />
   }
   return (
     <>
@@ -90,8 +99,7 @@ function Index(props) {
             </h1>
             <p
               style={{
-                fontWeight: 600,
-                fontSize: 22,
+                fontSize: 24,
                 margin: "30px 20px",
               }}
             >

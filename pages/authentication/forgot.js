@@ -13,7 +13,7 @@ function Forgot(props) {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [done, setDone] = useState(true);
+  const [done, setDone] = useState(false);
 
   const resetPassword = () => {
     supabase.auth

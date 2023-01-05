@@ -81,10 +81,10 @@ function NewPassword() {
           }}
         ></div>
       </div>
-      <div style={{ width: "50%", margin: "auto" }}>
+      <div style={{  margin: "auto" }}>
         {!success ? (
-          <>
-            <div style={{ margin: "15px 0" }}>
+          <div style={{width:'50%',margin:'auto'}}>
+            <div style={{ margin: "35px 0" }}>
               <label style={{ color: "black" }}>New Password</label>
               <input
                 type="password"
@@ -143,7 +143,7 @@ function NewPassword() {
             >
               {working ? "Working..." : "Change Password"}
             </button>
-          </>
+          </div>
         ) : (
           <div>
             <div
@@ -156,14 +156,14 @@ function NewPassword() {
                 padding: 40,
               }}
             >
-              <h2 style={{ color: "lightseagreen" }}>
+              <h2 style={{ color: "lightseagreen",fontSize:28,marginBottom:40 }}>
                 Password changes Successfully!
               </h2>
-              <h4 style={{ fontStyle: "italic" }}>
-                Now go back to the &nbsp;
-                <span style={{ color: "cornflowerblue" }}>Login</span>
-                &nbsp; page and log yourself in with the &nbsp;
-                <span style={{ color: "cornflowerblue" }}>new password.</span>
+              <h4 style={{ fontStyle: "italic", margin:'20px 0',fontSize:19}}>
+                You can now go back to the
+                <span style={{ color: "cornflowerblue" }}> Login </span>
+                page and log yourself in with the
+                <span style={{ color: "cornflowerblue" }}> new password.</span>
                 &nbsp;
               </h4>
               <div

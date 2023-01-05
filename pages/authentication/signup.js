@@ -19,10 +19,9 @@ function Signup() {
   const [emailSent, setEmailSent] = useState(false);
   const [logging, setLogging] = useState(false);
   const router = useRouter();
-  useEffect(()=>{
+  useEffect(() => {
     console.log("Router Query", router.query);
-  }, [])
-
+  }, []);
 
   const signup = () => {
     setLogging(true);
@@ -32,7 +31,7 @@ function Signup() {
         password,
       })
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.error?.status === 422) {
           setError("Enter valid email id, please!");
         } else {
@@ -48,7 +47,7 @@ function Signup() {
             progress: undefined,
             theme: "colored",
           });
-          if(router.query.value == "company"){
+          if (router.query.value == "company") {
             router.push("/payment");
           }
         }
@@ -84,12 +83,10 @@ function Signup() {
           justifyContent: "center",
           background: "#3e3535",
           color: "white",
-          padding:'20px 0'
+          padding: "20px 0",
         }}
       >
-        
-        <h3 style={{fontSize:22}}>Tide</h3>
-        
+        <h3 style={{ fontSize: 22 }}>Tide</h3>
       </div>
 
       <div style={{ width: "50%", margin: "auto" }}>
@@ -110,9 +107,29 @@ function Signup() {
                 margin: "25px 0 60px 0",
               }}
             >
-              <span style={{ color: "#DB4437" }}>Verification</span> email has sent. Please! check your{" "}
+              <span style={{ color: "#DB4437" }}>Verification</span> email has
+              sent. Please! check your{" "}
               <span style={{ color: "#DB4437" }}>inbox</span> and click on
               <span style={{ color: "blue" }}> verify</span>.
+            </p>
+            <p
+              style={{
+                color: "black",
+                fontSize: 18,
+                textAlign: "center",
+                margin: "15px 0 60px 0",
+                fontStyle: "italic",
+              }}
+            >
+              <span style={{ color: "#DB4437" }}>Note:</span> If there is no
+              verification email in your inbox, then you have already signed up.
+              You can also reset your password{" "}
+              <Link
+                href="/authentication/forgot"
+                style={{ color: "cornflowerblue", textDecoration: "underline" }}
+              >
+                Reset Password
+              </Link>
             </p>
             <div style={{ marginBottom: 12 }}>
               <Link
@@ -132,29 +149,29 @@ function Signup() {
           </div>
         ) : (
           <>
-           <div style={{ margin: "40px 0 20px 0" }}>
-          <button
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              background: "#DB4437",
-              width: "100%",
-              alignItems: "center",
-              borderRadius: 18,
-              cursor: "pointer",
-              borderWidth: 0,
-              boxShadow:'1px 2px 5px -1px rgb(0 0 0);',
-              padding:'15px 0'
-            }}
-            onClick={() => loginWithGoogle()}
-          >
-            <GoogleIcon style={{ color: "white", fontSize: 28 }} />
-            <p style={{ marginLeft: 15, fontSize: 18, color: "white" }}>
-              Login With Google
-            </p>
-          </button>
-        </div>
-        <hr style={{margin:'30px 0'}} />
+            <div style={{ margin: "40px 0 20px 0" }}>
+              <button
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  background: "#DB4437",
+                  width: "100%",
+                  alignItems: "center",
+                  borderRadius: 18,
+                  cursor: "pointer",
+                  borderWidth: 0,
+                  boxShadow: "1px 2px 5px -1px rgb(0 0 0);",
+                  padding: "15px 0",
+                }}
+                onClick={() => loginWithGoogle()}
+              >
+                <GoogleIcon style={{ color: "white", fontSize: 28 }} />
+                <p style={{ marginLeft: 15, fontSize: 18, color: "white" }}>
+                  Login With Google
+                </p>
+              </button>
+            </div>
+            <hr style={{ margin: "30px 0" }} />
 
             <div style={{ margin: "15px 0" }}>
               <label style={{ color: "black" }}>Email Address</label>
@@ -207,8 +224,8 @@ function Signup() {
                     border: "1px solid red",
                     background: "#f2dddd",
                     color: "black",
-                    marginBottom:15,
-                    alignItems:'center'
+                    marginBottom: 15,
+                    alignItems: "center",
                   }}
                 >
                   <ErrorOutlineIcon style={{ marginRight: 15 }} />
