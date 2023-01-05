@@ -3,10 +3,8 @@ import CodeEditorWindow from "./CodeEditorWindow";
 import axios from "axios";
 import { classnames } from "../utils/general.js";
 import { languageOptions } from "../constants/languageOptions";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 import { defineTheme } from "../../lib/defineTheme";
 import useKeyPress from "../../hooks/useKeyPress";
 import OutputWindow from "./OutputWindow";
@@ -45,8 +43,9 @@ const target = 5;
 console.log(binarySearch(arr, target));
 `;
 
-const Landing = () => {
-  const [code, setCode] = useState(javascriptDefault);
+const Landing = (props) => {
+  
+  const [code, setCode] = useState("");
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
@@ -55,7 +54,7 @@ const Landing = () => {
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
-
+  
   const onSelectChange = (sl) => {
     console.log("selected Option...", sl);
     setLanguage(sl);
@@ -214,7 +213,7 @@ const Landing = () => {
       />
 
       <a
-        href="https://github.com/manuarora700/react-code-editor"
+        href="#"
         title="Fork me on GitHub"
         className="github-corner"
         target="_blank"
@@ -254,7 +253,7 @@ const Landing = () => {
       <div className="flex flex-row space-x-4 items-start px-4 py-4">
         <div className="flex flex-col w-full h-full justify-start items-end">
           <CodeEditorWindow
-            code={code}
+            code={props.code}
             onChange={onChange}
             language={language?.value}
             theme={theme.value}
@@ -292,6 +291,7 @@ const Landing = () => {
           </div>
           {outputDetails && <OutputDetails outputDetails={outputDetails} />}
         </div>
+       
       </div>
     </>
   );
