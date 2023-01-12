@@ -134,7 +134,6 @@ function Login(props) {
         </div>
         <hr style={{margin:'30px 0'}} />
         <div style={{ margin: "15px 0" }}>
-          <label style={{ color: "black" }}>Email Address</label>
           <input
             type="email"
             placeholder="Your email address"
@@ -153,7 +152,6 @@ function Login(props) {
           />
         </div>
         <div style={{ margin: "15px 0" }}>
-          <label style={{ color: "black" }}>Your Password</label>
           <input
             type="password"
             placeholder="Your password"

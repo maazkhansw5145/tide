@@ -26,7 +26,7 @@ console.log(props)
     <div
       style={{
         display: "flex",
-        margin: "20px 40px 0 30px",
+        padding: "20px 40px 0 30px",
         justifyContent: "space-between",
       }}
     >
