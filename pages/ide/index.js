@@ -12,16 +12,11 @@ function Ide(props) {
   const router = useRouter();
   const question = router.query.value;
   const [copied, setCopied] = useState(false);
-  useEffect(() => {
-    if (!props.auth.isAuthenticated) {
-      router.push("/");
-    }
-  }, [props.auth.isAuthenticated]);
-  const submit = () => {
-    router.push({
-      pathname: "/submit",
-    });
-  };
+  // useEffect(() => {
+  //   if (!props.auth.isAuthenticated) {
+  //     router.push("/");
+  //   }
+  // }, [props.auth.isAuthenticated]);
   return (
     <div
       className={
@@ -46,25 +41,6 @@ function Ide(props) {
 
         {copied ? <span style={{ color: "red" }}>Copied.</span> : null}
       </div>
-     
-        <button
-        style={{
-            backgroundColor: "#04AA6D",
-            border: "none",
-            color: "white",
-            padding: "20px",
-            textAlign: "center",
-            textDecoration: "none",
-            display: "inline-block",
-            fontSize: "16px",
-            marginLeft: "600px"
-          
-        }}
-          onClick={submit}
-          className="bg-gray-500 justify-self-center hover:bg-blue-700 text-white font-bold py-2 px-4 ml-10 mb-2 rounded"
-        >
-          Submit
-        </button>
       </div>
   );
 }

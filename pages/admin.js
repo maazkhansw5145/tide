@@ -10,12 +10,12 @@ const Admin = () => {
   const [question, setQuestion] = useState("");
   const router = useRouter();
   const userType = router.query.value;
-  useEffect(() => {
-    console.log("Router Query: ", userType);
-    if (userType !== "premium") {
-      router.push("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   console.log("Router Query: ", userType);
+  //   if (userType !== "premium") {
+  //     router.push("/");
+  //   }
+  // }, []);
   const submit = () => {
     router.push({
       pathname: "/ide",

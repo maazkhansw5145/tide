@@ -5,13 +5,14 @@ import { classnames } from "../utils/general.js";
 import { languageOptions } from "../constants/languageOptions";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { defineTheme } from "../../lib/defineTheme";
-import useKeyPress from "../../hooks/useKeyPress";
+import { defineTheme } from "../lib/defineTheme";
+import useKeyPress from "../hooks/useKeyPress";
 import OutputWindow from "./OutputWindow";
 import CustomInput from "./CustomInput";
 import OutputDetails from "./OutputDetails";
 import ThemeDropdown from "./ThemeDropdown";
 import LanguagesDropdown from "./LanguagesDropdown";
+import { useRouter } from "next/router";
 
 const javascriptDefault = `/**
 * Problem: Binary Search: Search a sorted array for a target value.
@@ -44,7 +45,7 @@ console.log(binarySearch(arr, target));
 `;
 
 const Landing = (props) => {
-  
+  const router = useRouter();
   const [code, setCode] = useState("");
   const [customInput, setCustomInput] = useState("");
   const [outputDetails, setOutputDetails] = useState(null);
@@ -79,6 +80,7 @@ const Landing = (props) => {
     }
   };
   const handleCompile = () => {
+    console.log("Code: ",code);
     setProcessing(true);
     const formData = {
       language_id: language.id,
@@ -197,6 +199,14 @@ const Landing = (props) => {
       progress: undefined,
     });
   };
+  const submit = () => {
+    router.push({
+      pathname: "/submit",
+      query: {
+        value: code,
+      },
+    });
+  };
 
   return (
     <>
@@ -253,7 +263,7 @@ const Landing = (props) => {
       <div className="flex flex-row space-x-4 items-start px-4 py-4">
         <div className="flex flex-col w-full h-full justify-start items-end">
           <CodeEditorWindow
-            code={props.code}
+            code={code}
             onChange={onChange}
             language={language?.value}
             theme={theme.value}
@@ -279,19 +289,18 @@ const Landing = (props) => {
                 display: "inline-block",
                 fontSize: "16px"
               }}
-              onClick={handleCompile}
+              onClick={submit}
               disabled={!code}
               className={classnames(
                 "mt-4 border-2 border-black z-10 rounded-md shadow-[5px_5px_0px_0px_rgba(0,0,0)] px-4 py-2 hover:shadow transition duration-200 bg-white flex-shrink-0",
                 !code ? "opacity-50" : ""
               )}
             >
-              {processing ? "Processing..." : "Compile and Execute"}
+              Submit
             </button>
           </div>
           {outputDetails && <OutputDetails outputDetails={outputDetails} />}
         </div>
-       
       </div>
     </>
   );
