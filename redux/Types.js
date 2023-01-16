@@ -6,3 +6,4 @@ export const GET_ERRORS = "GET_ERRORS";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const CHANGE_THEME = "CHANGE_THEME";
 export const PREMIUM_BOUGHT = "PREMIUM_BOUGHT";
+export const USER_TYPE = "USER_TYPE";

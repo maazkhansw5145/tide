@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Link from "next/link";
 import Image from "next/image";
 import DarkModeToggleButton from "../DarkModeToggleButton";
@@ -8,7 +8,29 @@ import { logout } from "../../redux/actions/authActions";
 import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
 import AnchorLink from "react-anchor-link-smooth-scroll";
+import Drawer from "./Drawer";
+
 function Header(props) {
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
+  const hasWindow = typeof window !== "undefined";
+
+  function getWindowDimensions() {
+    const width = hasWindow ? window.innerWidth : null;
+    setWindowWidth(width);
+  }
+
+  useEffect(() => {
+    if (hasWindow) {
+      function handleResize() {
+        getWindowDimensions();
+      }
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [hasWindow]);
+
   const router = useRouter();
   const supabase = createClient(
     "https://qubvoqsgnorlsylveylr.supabase.co",
@@ -49,63 +71,65 @@ function Header(props) {
           setTheme={props.changeTheme}
         />
       </div>
-      {/* right side <a> tags */}
-      <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
-        <AnchorLink
-          href="#testimonial"
-          style={{
-            fontWeight: 500,
-            fontSize: 16,
-            marginRight: 40,
-          }}
+      {windowWidth > 700 ? (
+        <div
+          style={{ display: "flex", alignItems: "center", color: "inherit" }}
         >
-          Testimonials
-        </AnchorLink>
-        <AnchorLink
-          href="#features"
-          style={{
-            fontWeight: 500,
-            fontSize: 16,
-            marginRight: 40,
-          }}
-        >
-          Features
-        </AnchorLink>
-        <AnchorLink
-          href="#pricing"
-          style={{
-            fontWeight: 500,
-            fontSize: 16,
-            marginRight: 40,
-          }}
-        >
-          Pricing
-        </AnchorLink>
-        {router.pathname === "/" && props.auth.isAuthenticated && (
-          <Link
-            href="/ide"
+          <AnchorLink
+            href="#testimonial"
             style={{
               fontWeight: 500,
               fontSize: 16,
               marginRight: 40,
             }}
           >
-            IDE
-          </Link>
-        )}
-        {router.pathname !== "/" && (
-          <Link
-            href="/"
+            Testimonials
+          </AnchorLink>
+          <AnchorLink
+            href="#features"
             style={{
               fontWeight: 500,
               fontSize: 16,
               marginRight: 40,
             }}
           >
-            Home Page
-          </Link>
-        )}
-        {/* {!props.auth.user?.premium && router.pathname !== "/payment" && (
+            Features
+          </AnchorLink>
+          <AnchorLink
+            href="#pricing"
+            style={{
+              fontWeight: 500,
+              fontSize: 16,
+              marginRight: 40,
+            }}
+          >
+            Pricing
+          </AnchorLink>
+          {router.pathname === "/" && props.auth.isAuthenticated && (
+            <Link
+              href="/ide"
+              style={{
+                fontWeight: 500,
+                fontSize: 16,
+                marginRight: 40,
+              }}
+            >
+              IDE
+            </Link>
+          )}
+          {router.pathname !== "/" && (
+            <Link
+              href="/"
+              style={{
+                fontWeight: 500,
+                fontSize: 16,
+                marginRight: 40,
+              }}
+            >
+              Home Page
+            </Link>
+          )}
+          {/* {!props.auth.user?.premium && router.pathname !== "/payment" && (
           <Link
             href="/payment"
             style={{
@@ -117,67 +141,74 @@ function Header(props) {
             Features
           </Link>
         )} */}
-        {!props.auth.isAuthenticated ? (
-          <>
-            <Link
-              href="/authentication/login"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 20,
-              }}
-            >
-              Login
-            </Link>
+          {!props.auth.isAuthenticated ? (
+            <>
+              <Link
+                href="/authentication/login"
+                style={{
+                  fontWeight: 500,
+                  fontSize: 16,
+                  marginRight: 20,
+                }}
+              >
+                Login
+              </Link>
 
-            <div
-              style={{
-                borderLeft: "1px solid #1BF0A2",
-                height: 35,
-                marginRight: 12,
-              }}
-            ></div>
+              <div
+                style={{
+                  borderLeft: "1px solid #1BF0A2",
+                  height: 35,
+                  marginRight: 12,
+                }}
+              ></div>
 
-            <Link
-              href="/authentication/auth_select"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 15,
-              }}
-            >
-              sign up
-            </Link>
+              <Link
+                href="/authentication/auth_select"
+                style={{
+                  fontWeight: 500,
+                  fontSize: 16,
+                  marginRight: 15,
+                }}
+              >
+                sign up
+              </Link>
 
-            <div style={{ borderLeft: "1px solid #1BF0A2", height: 35 }}></div>
-          </>
-        ) : (
-          <>
-            <div
-              style={{
-                borderLeft: "1px solid #1BF0A2",
-                height: 35,
-                marginRight: 12,
-              }}
-            ></div>
-            <button
-              onClick={() => logout()}
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 20,
-                background: "inherit",
-                color: "inherit",
-                borderWidth: 0,
-                cursor: "pointer",
-              }}
-            >
-              Log out
-            </button>
-            <div style={{ borderLeft: "1px solid #1BF0A2", height: 35 }}></div>
-          </>
-        )}
-      </div>
+              <div
+                style={{ borderLeft: "1px solid #1BF0A2", height: 35 }}
+              ></div>
+            </>
+          ) : (
+            <>
+              <div
+                style={{
+                  borderLeft: "1px solid #1BF0A2",
+                  height: 35,
+                  marginRight: 12,
+                }}
+              ></div>
+              <button
+                onClick={() => logout()}
+                style={{
+                  fontWeight: 500,
+                  fontSize: 16,
+                  marginRight: 20,
+                  background: "inherit",
+                  color: "inherit",
+                  borderWidth: 0,
+                  cursor: "pointer",
+                }}
+              >
+                Log out
+              </button>
+              <div
+                style={{ borderLeft: "1px solid #1BF0A2", height: 35 }}
+              ></div>
+            </>
+          )}
+        </div>
+      ) : (
+        <Drawer open={open} setOpen={setOpen} />
+      )}
     </div>
   );
 }

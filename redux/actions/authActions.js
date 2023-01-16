@@ -4,6 +4,7 @@ import {
   LOGOUT_SUCCESS,
   CLEAR_AUTH_MSG,
   PREMIUM_BOUGHT,
+  USER_TYPE
 } from "../Types";
 import url from "../../config/URL";
 import { toast } from "react-toastify";
@@ -82,4 +83,11 @@ export const clearAuthMsg = () => async (dispatch) => {
   dispatch({
     type: CLEAR_AUTH_MSG,
   });
+};
+
+export const selectUserType = (type) => {
+  return {
+    type: USER_TYPE,
+    data: type
+  };
 };

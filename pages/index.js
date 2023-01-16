@@ -59,6 +59,7 @@ function Index(props) {
           emailId: value.data.user.user_metadata.email,
           picture_url: value.data.user.user_metadata.picture,
           email_verified: value.data.user.user_metadata.email_verified,
+          user_type: props.auth.user_type,
         });
         setLoading(false);
         toast.success("Logged in successfully", {
@@ -164,7 +165,7 @@ function Index(props) {
           {/* coding image */}
           {windowWidth > 1000 && (
             <div style={{ width: "35%", height: 480 }}>
-              <CodeEditorWindow theme={props.server.theme}/>
+              <CodeEditorWindow theme={props.server.theme} />
             </div>
           )}
         </div>
@@ -213,11 +214,11 @@ function Index(props) {
       <div style={{ margin: "50px 0" }} id="features">
         <Features />
       </div>
-      <div style={{ margin: "50px 0",display:'block' }} id="pricing">
+      <div style={{ margin: "50px 0", display: "block" }} id="pricing">
         <Pricing windowWidth={windowWidth} />
       </div>
 
-      <div style={{ margin: "50px 0 0 0",display:'block' }}>
+      <div style={{ margin: "50px 0 0 0", display: "block" }}>
         <Footer />
       </div>
     </>

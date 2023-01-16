@@ -76,17 +76,34 @@ function Signup() {
   return (
     <div>
       <div
-        className="title"
         style={{
           display: "flex",
-          marginBottom: "45px",
-          justifyContent: "center",
           background: "#3e3535",
-          color: "white",
-          padding: "20px 0",
         }}
       >
-        <h3 style={{ fontSize: 22 }}>Tide</h3>
+        <h3 style={{ margin: "20px auto", fontSize: 22 }}>Tide</h3>
+        <div
+          style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
+        ></div>
+
+        <div style={{ margin: "auto 0" }}>
+          <Link
+            href="/"
+            style={{
+              fontWeight: 500,
+              fontSize: 16,
+            }}
+          >
+            Home Page
+          </Link>
+        </div>
+        <div
+          style={{
+            borderLeft: "1px solid black",
+            height: 65,
+            margin: "0 15px",
+          }}
+        ></div>
       </div>
 
       <div style={{ width: 300, margin: "auto" }}>

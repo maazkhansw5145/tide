@@ -4,9 +4,9 @@ const userSchema = new Schema({
   name: {
     type: String,
   },
-  type: {
+  user_type: {
     type: String,
-    default: "recruiter",
+    default: "company",
   },
   emailId: {
     type: String,

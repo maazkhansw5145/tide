@@ -246,7 +246,7 @@ function Login(props) {
           style={{ marginTop: 20, display: "flex", justifyContent: "center" }}
         >
           <Link
-            href="/authentication/signup"
+            href="/authentication/auth_select"
             style={{
               fontWeight: 500,
               fontSize: 16,
