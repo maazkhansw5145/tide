@@ -1,13 +1,13 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import  DarkModeToggleButton from "../DarkModeToggleButton";
+import DarkModeToggleButton from "../DarkModeToggleButton";
 import { connect } from "react-redux";
 import { changeTheme } from "../../redux/actions/serverActions";
 import { logout } from "../../redux/actions/authActions";
 import { useRouter } from "next/router";
 import { createClient } from "@supabase/supabase-js";
-
+import AnchorLink from "react-anchor-link-smooth-scroll";
 function Header(props) {
   const router = useRouter();
   const supabase = createClient(
@@ -15,12 +15,11 @@ function Header(props) {
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
   );
 
-  
   const logout = () => {
     supabase.auth.signOut();
     props.logout();
   };
-console.log(props)
+  console.log(props);
 
   return (
     <div
@@ -31,8 +30,18 @@ console.log(props)
       }}
     >
       {/* logo */}
-      <Link href="/">
-        <Image src="/logo-tide.png" alt="logo" width={132} height={52} />
+      <Link
+        href="/"
+        style={{
+          fontSize: 34,
+          background:
+            "linear-gradient(to bottom left, #12FFA8 8%, #F78F95 85%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        {/* <Image src="/logo-tide.png" alt="logo" width={132} height={52} /> */}
+        Tide
       </Link>
       <div style={{ marginLeft: "auto" }}>
         <DarkModeToggleButton
@@ -42,19 +51,48 @@ console.log(props)
       </div>
       {/* right side <a> tags */}
       <div style={{ display: "flex", alignItems: "center", color: "inherit" }}>
-        {router.pathname === "/" &&
-          props.auth.isAuthenticated && (
-            <Link
-              href="/ide"
-              style={{
-                fontWeight: 500,
-                fontSize: 16,
-                marginRight: 40,
-              }}
-            >
-              IDE
-            </Link>
-          )}
+        <AnchorLink
+          href="#testimonial"
+          style={{
+            fontWeight: 500,
+            fontSize: 16,
+            marginRight: 40,
+          }}
+        >
+          Testimonials
+        </AnchorLink>
+        <AnchorLink
+          href="#features"
+          style={{
+            fontWeight: 500,
+            fontSize: 16,
+            marginRight: 40,
+          }}
+        >
+          Features
+        </AnchorLink>
+        <AnchorLink
+          href="#pricing"
+          style={{
+            fontWeight: 500,
+            fontSize: 16,
+            marginRight: 40,
+          }}
+        >
+          Pricing
+        </AnchorLink>
+        {router.pathname === "/" && props.auth.isAuthenticated && (
+          <Link
+            href="/ide"
+            style={{
+              fontWeight: 500,
+              fontSize: 16,
+              marginRight: 40,
+            }}
+          >
+            IDE
+          </Link>
+        )}
         {router.pathname !== "/" && (
           <Link
             href="/"

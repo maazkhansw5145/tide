@@ -89,7 +89,7 @@ function Signup() {
         <h3 style={{ fontSize: 22 }}>Tide</h3>
       </div>
 
-      <div style={{ width: "50%", margin: "auto" }}>
+      <div style={{ width: 300, margin: "auto" }}>
         {emailSent ? (
           <div
             style={{
@@ -184,7 +184,15 @@ function Signup() {
                   }
                   setEmail(e.target.value);
                 }}
-                style={{ width: "100%", margin: "10px 0", padding: 10 }}
+                style={{
+                  width: "100%",
+                  margin: "10px 0",
+                  padding: 10,
+                  border: "black 1px solid",
+                  color: "black",
+
+                  borderRadius: 10,
+                }}
                 onBlur={() => {
                   if (!email.includes("@")) {
                     setError("Invalid Email Id");
@@ -203,7 +211,15 @@ function Signup() {
                   }
                   setPassword(e.target.value);
                 }}
-                style={{ width: "100%", margin: "10px 0", padding: 10 }}
+                style={{
+                  width: "100%",
+                  margin: "10px 0",
+                  padding: 10,
+                  border: "black 1px solid",
+                  color: "black",
+
+                  borderRadius: 10,
+                }}
                 onBlur={() => {
                   if (password.length < 8) {
                     setError("Password should've at least 8 characters");

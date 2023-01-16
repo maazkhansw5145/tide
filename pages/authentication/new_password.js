@@ -57,7 +57,7 @@ function NewPassword() {
           background: "#3e3535",
         }}
       >
-        <h3 style={{ margin: "20px auto",fontSize:22 }}>Tide</h3>
+        <h3 style={{ margin: "20px auto", fontSize: 22 }}>Tide</h3>
         <div
           style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
         ></div>
@@ -81,9 +81,9 @@ function NewPassword() {
           }}
         ></div>
       </div>
-      <div style={{  margin: "auto" }}>
+      <div style={{ margin: "auto" }}>
         {!success ? (
-          <div style={{width:'50%',margin:'auto'}}>
+          <div style={{ width: 300, margin: "auto" }}>
             <div style={{ margin: "35px 0" }}>
               <label style={{ color: "black" }}>New Password</label>
               <input
@@ -95,7 +95,14 @@ function NewPassword() {
                   }
                   setNewPassword(e.target.value);
                 }}
-                style={{ width: "100%", margin: "10px 0", padding: 10 }}
+                style={{
+                  width: "100%",
+                  margin: "10px 0",
+                  padding: 10,
+                  border: "black 1px solid",
+                  borderRadius: 10,
+                  color:'black'
+                }}
                 onBlur={() => {
                   if (newPassword.length < 8) {
                     setError("Password should've at least 8 characters");
@@ -116,9 +123,8 @@ function NewPassword() {
                     justifyContent: "center",
                     border: "1px solid red",
                     color: "black",
-                    marginBottom:15,
-                    alignItems:'center'
-
+                    marginBottom: 15,
+                    alignItems: "center",
                   }}
                 >
                   <ErrorOutlineIcon style={{ marginRight: 15 }} />
@@ -156,10 +162,18 @@ function NewPassword() {
                 padding: 40,
               }}
             >
-              <h2 style={{ color: "lightseagreen",fontSize:28,marginBottom:40 }}>
+              <h2
+                style={{
+                  color: "lightseagreen",
+                  fontSize: 28,
+                  marginBottom: 40,
+                }}
+              >
                 Password changes Successfully!
               </h2>
-              <h4 style={{ fontStyle: "italic", margin:'20px 0',fontSize:19}}>
+              <h4
+                style={{ fontStyle: "italic", margin: "20px 0", fontSize: 19 }}
+              >
                 You can now go back to the
                 <span style={{ color: "cornflowerblue" }}> Login </span>
                 page and log yourself in with the

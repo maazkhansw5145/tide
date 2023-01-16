@@ -12,9 +12,31 @@ import { toast } from "react-toastify";
 import Loading from "../components/Loading";
 import Link from "next/link";
 import Image from "next/image";
+import Pricing from "../components/Pricing";
+import Testimonials from "../components/Testimonials";
+import Features from "../components/Features";
+import Footer from "../components/Footer";
 
 function Index(props) {
   const [loading, setLoading] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const hasWindow = typeof window !== "undefined";
+
+  function getWindowDimensions() {
+    const width = hasWindow ? window.innerWidth : null;
+    setWindowWidth(width);
+  }
+
+  useEffect(() => {
+    if (hasWindow) {
+      function handleResize() {
+        getWindowDimensions();
+      }
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [hasWindow]);
 
   useEffect(() => {
     console.log(props.auth.isAuthenticated);
@@ -72,11 +94,11 @@ function Index(props) {
 
         <div style={{ display: "flex" }}>
           {/* font */}
-          <div>
+          <div style={{ width: 700 }}>
             <h1
               style={{
-                margin: "0 20px",
-                fontSize: "3.8em",
+                padding: "0 20px",
+                fontSize: "3.7em",
               }}
             >
               <span style={{ color: "#F78F95" }}>Assess</span> tech talent{" "}
@@ -100,8 +122,8 @@ function Index(props) {
             </h1>
             <p
               style={{
-                fontSize: 24,
-                margin: "30px 20px",
+                fontSize: 23,
+                padding: "30px 20px",
               }}
             >
               Tide is a Technical Interview Development Environment to conduct
@@ -140,17 +162,21 @@ function Index(props) {
             )}
           </div>
           {/* coding image */}
-          <div style={{ width: 635, height: 345 }}>
-            <CodeEditorWindow />
-            {/* <Image
+          {windowWidth > 1000 && (
+            <div style={{ width: "35%", height: 480 }}>
+              <CodeEditorWindow theme={props.server.theme}/>
+            </div>
+          )}
+        </div>
+        {/*  */}
+        {/* <Image
               src="/coding-screen.png"
               alt="coding screen"
               width={635}
               height={315}
               style={{ marginTop: 30 }}
             /> */}
-          </div>
-        </div>
+        {/* </div> */}
         {/* Polygon */}
         <div
           style={{
@@ -181,188 +207,19 @@ function Index(props) {
           ></div>
         </div>
       </div>
-      <div
-        style={{
-          color: "black",
-          textAlign: "center",
-          background: "aliceblue",
-          padding: "50px 0",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "2.1243rem",
-            margin: "30px 0",
-            fontWeight: 600,
-          }}
-        >
-          Why Tide?
-        </p>
-        <div style={{ maxWidth: 800, margin: "auto" }}>
-          <p
-            style={{
-              fontWeight: 400,
-              fontSize: "1.35rem",
-              marginBottom: 30,
-              fontFamily: "cursive",
-            }}
-          >
-            In a collaborative code editor with strong language support, Tide
-            wants to provide interviewers and candidates with a smooth interview
-            experience. Without assistance from an IDE, candidates frequently
-            write pseudo-code, making it challenging for interviewers to
-            evaluate their coding skills.
-          </p>
-          <p
-            style={{
-              fontWeight: 400,
-              fontSize: "1.35rem",
-              marginBottom: 30,
-              fontFamily: "cursive",
-            }}
-          >
-            Developers use IDEs to be productive in their day-to-day work, they
-            rely on features such as auto-complete and syntax checks - why
-            should the coding interview be any different?
-          </p>
-        </div>
+      <div style={{ margin: "120px 0" }} id="testimonial">
+        <Testimonials />
       </div>
-      <div
-        style={{
-          color: "black",
-          textAlign: "center",
-          padding: "50px 0",
-        }}
-      >
-        <p
-          style={{
-            fontSize: "2.1243rem",
-            marginBottom: 50,
-            fontWeight: 600,
-          }}
-        >
-          You should choose Tide because...
-        </p>
-        <div
-          style={{
-            margin: "20px auto",
-
-            display: "grid",
-            gridRow: "auto auto",
-            gridRowGap: 20,
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              background: "#333",
-              padding: 20,
-              borderRadius: 10,
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              width:700,
-              fontFamily: "sans-serif",
-              boxShadow:
-                "rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;",
-              marginRight: 20,
-            }}
-          >
-            <div>
-              <p style={{ fontSize: 24 }}>Easy to use</p>
-              <p style={{ fontSize: 20, margin: 20 }}>
-                Tide is the most easy to use platform for recruiting programmers
-              </p>
-            </div>
-          </div>
-          <div
-            style={{
-              background: "#333",
-              padding: 20,
-              borderRadius: 10,
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              fontFamily: "sans-serif",
-              gridColumnGap: 20,
-              width:700,
-
-              boxShadow:
-                "rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;",
-            }}
-          >
-            <div>
-              <p style={{ fontSize: 24 }}>Support for languages</p>
-              <p style={{ fontSize: 20, margin: 20 }}>
-                Tides IDE supports almost all of the languages
-              </p>
-            </div>
-          </div>
-          <div
-            style={{
-              background: "#333",
-              padding: 20,
-              borderRadius: 10,
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              fontFamily: "sans-serif",
-              width:700,
-
-              boxShadow:
-                "rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;",
-              marginRight: 20,
-            }}
-          >
-            <div>
-              <p style={{ fontSize: 24 }}>Low cost</p>
-              <p style={{ fontSize: 20, margin: 20 }}>
-                You can start with just 25$/month as a small enterprise company
-              </p>
-            </div>
-          </div>
-          <div
-            style={{
-              background: "#333",
-              padding: 20,
-              borderRadius: 10,
-              color: "#fff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              fontFamily: "sans-serif",
-              width:700,
-
-              boxShadow:
-                "rgb(0 0 0 / 20%) 0px 2px 1px -1px, rgb(0 0 0 / 14%) 0px 1px 1px 0px, rgb(0 0 0 / 12%) 0px 1px 3px 0px;",
-              // marginLeft: 20,
-            }}
-          >
-            <div>
-              <p style={{ fontSize: 24 }}>Reliable</p>
-              <p style={{ fontSize: 20, margin: 20 }}>
-                If you are looking for a skill full programmer, invite them to
-                tide for test
-              </p>
-            </div>
-          </div>
-        </div>
+      <div style={{ margin: "50px 0" }} id="features">
+        <Features />
+      </div>
+      <div style={{ margin: "50px 0",display:'block' }} id="pricing">
+        <Pricing windowWidth={windowWidth} />
       </div>
 
-      <div style={{padding:"20px 50px",background:'black',display:'flex',justifyContent:'space-between'}}>
-            <p style={{fontSize:20,alignItems:'center'}}>&#169; &nbsp;Tide @ 2023</p>
-            <Link href="/">
-        <Image src="/logo-tide.png" alt="logo" width={132} height={52} />
-      </Link>
+      <div style={{ margin: "50px 0 0 0",display:'block' }}>
+        <Footer />
       </div>
-
     </>
   );
 }

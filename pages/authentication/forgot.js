@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { createClient } from "@supabase/supabase-js";
 import Link from "next/link";
@@ -14,7 +14,24 @@ function Forgot(props) {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const hasWindow = typeof window !== "undefined";
 
+  function getWindowDimensions() {
+    const width = hasWindow ? window.innerWidth : null;
+    setWindowWidth(width);
+  }
+
+  useEffect(() => {
+    if (hasWindow) {
+      function handleResize() {
+        getWindowDimensions();
+      }
+
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }
+  }, [hasWindow]);
   const resetPassword = () => {
     supabase.auth
       .resetPasswordForEmail(email, {
@@ -69,16 +86,15 @@ function Forgot(props) {
           justifyContent: "center",
           background: "#3e3535",
           color: "white",
-          padding:'20px 0'
-
+          padding: "20px 0",
         }}
       >
-        <h3 style={{fontSize:22}}>Tide</h3>
+        <h3 style={{ fontSize: 22 }}>Tide</h3>
       </div>
       {done ? (
         <div
           style={{
-            margin: 80,
+            margin: windowWidth > 600 ? "80px" : "5px",
             textAlign: "center",
             color: "black",
             background: "aliceblue",
@@ -86,10 +102,12 @@ function Forgot(props) {
             padding: 40,
           }}
         >
-          <h2 style={{ color: "lightseagreen",fontSize:28,marginBottom:40 }}>
+          <h2
+            style={{ color: "lightseagreen", fontSize: 28, marginBottom: 40 }}
+          >
             Password Reset Link Sent Successfully!
           </h2>
-          <h4 style={{margin:'20px 0',fontSize:19}}>
+          <h4 style={{ margin: "20px 0", fontSize: 19 }}>
             Kindly, open your inbox then open then email from{" "}
             <span style={{ color: "cornflowerblue", fontStyle: "italic" }}>
               noreply@mail.app.supabase.io
@@ -120,7 +138,7 @@ function Forgot(props) {
           </div>
         </div>
       ) : (
-        <div style={{ width: "50%", margin: "auto" }}>
+        <div style={{ width: 300, margin: "auto" }}>
           <div style={{ margin: "15px 0" }}>
             <label style={{ color: "black" }}>Email Address</label>
             <input
@@ -132,7 +150,15 @@ function Forgot(props) {
                 }
                 setEmail(e.target.value);
               }}
-              style={{ width: "100%", margin: "10px 0", padding: 10 }}
+              style={{
+                width: "100%",
+                margin: "10px 0",
+                padding: 10,
+                color: "black",
+
+                border: "black 1px solid",
+                borderRadius: 10,
+              }}
               onBlur={() => {
                 if (!email.includes("@")) {
                   setError("Invalid Email Id");
@@ -153,9 +179,8 @@ function Forgot(props) {
                   textAlign: "center",
                   display: "flex",
                   justifyContent: "center",
-                  marginBottom:15,
-                  alignItems:'center'
-
+                  marginBottom: 15,
+                  alignItems: "center",
                 }}
               >
                 <ErrorOutlineIcon style={{ marginRight: 15 }} />

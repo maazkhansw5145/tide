@@ -4,6 +4,10 @@ const userSchema = new Schema({
   name: {
     type: String,
   },
+  type: {
+    type: String,
+    default: "recruiter",
+  },
   emailId: {
     type: String,
     required: true,

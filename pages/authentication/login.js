@@ -8,7 +8,6 @@ import GoogleIcon from "@mui/icons-material/Google";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { createClient } from "@supabase/supabase-js";
 
-
 const supabase = createClient(
   "https://qubvoqsgnorlsylveylr.supabase.co",
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
@@ -84,7 +83,7 @@ function Login(props) {
           background: "#3e3535",
         }}
       >
-        <h3 style={{ margin: "20px auto",fontSize:22 }}>Tide</h3>
+        <h3 style={{ margin: "20px auto", fontSize: 22 }}>Tide</h3>
         <div
           style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
         ></div>
@@ -109,7 +108,7 @@ function Login(props) {
         ></div>
       </div>
 
-      <div style={{ width: "50%", margin: "auto" }}>
+      <div style={{ width: 300, margin: "auto" }}>
         <div style={{ margin: "40px 0 20px 0" }}>
           <button
             style={{
@@ -121,8 +120,8 @@ function Login(props) {
               borderRadius: 18,
               cursor: "pointer",
               borderWidth: 0,
-              boxShadow:'1px 2px 5px -1px rgb(0 0 0);',
-              padding:'15px 0'
+              boxShadow: "1px 2px 5px -1px rgb(0 0 0);",
+              padding: "15px 0",
             }}
             onClick={() => loginWithGoogle()}
           >
@@ -132,7 +131,7 @@ function Login(props) {
             </p>
           </button>
         </div>
-        <hr style={{margin:'30px 0'}} />
+        <hr style={{ margin: "30px 0" }} />
         <div style={{ margin: "15px 0" }}>
           <input
             type="email"
@@ -143,7 +142,14 @@ function Login(props) {
               }
               setEmail(e.target.value);
             }}
-            style={{ width: "100%", margin: "10px 0", padding: 10 }}
+            style={{
+              width: "100%",
+              margin: "10px 0",
+              padding: 10,
+              border: "black 1px solid",
+              borderRadius: 10,
+              color: "black",
+            }}
             onBlur={() => {
               if (!email.includes("@")) {
                 setError("Invalid Email Id");
@@ -161,7 +167,14 @@ function Login(props) {
               }
               setPassword(e.target.value);
             }}
-            style={{ width: "100%", margin: "10px 0", padding: 10 }}
+            style={{
+              width: "100%",
+              margin: "10px 0",
+              padding: 10,
+              border: "black 1px solid",
+              borderRadius: 10,
+              color: "black",
+            }}
             onBlur={() => {
               if (password.length < 8) {
                 setError("Password should've at least 8 characters");
@@ -182,9 +195,8 @@ function Login(props) {
                 justifyContent: "center",
                 border: "1px solid red",
                 color: "black",
-                marginBottom:15,
-                alignItems:'center'
-
+                marginBottom: 15,
+                alignItems: "center",
               }}
             >
               <ErrorOutlineIcon style={{ marginRight: 15 }} />
