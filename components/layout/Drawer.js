@@ -69,7 +69,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-export default function PersistentDrawerRight() {
+export default function PersistentDrawerRight(props) {
+  console.log(props.theme);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -100,6 +101,7 @@ export default function PersistentDrawerRight() {
       <Main open={open}>
         <DrawerHeader />
       </Main>
+
       <Drawer
         sx={{
           width: drawerWidth,
@@ -108,16 +110,24 @@ export default function PersistentDrawerRight() {
             width: drawerWidth,
           },
         }}
+        PaperProps={{
+          sx: {
+            background: props.theme === "white" ? "white" : "black",
+            color:  props.theme === "white" ? "black" : "white",
+          }
+        }}
         variant="persistent"
         anchor="right"
         open={open}
       >
         <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={handleDrawerClose}
+          
+          >
             {theme.direction === "rtl" ? (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon style={{color: props.theme === "white" ? "black" : "white"}} />
             ) : (
-              <ChevronRightIcon />
+              <ChevronRightIcon  style={{color: props.theme === "white" ? "black" : "white"}} />
             )}
           </IconButton>
         </DrawerHeader>

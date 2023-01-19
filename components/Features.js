@@ -6,14 +6,20 @@ import PinchIcon from "@mui/icons-material/Pinch";
 import CodeIcon from "@mui/icons-material/Code";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import GppGoodIcon from "@mui/icons-material/GppGood";
-function Features() {
+function Features(props) {
   return (
-    <div>
+    <div
+      style={{
+        padding: "50px 0",
+        background: props.theme === "white" ? "white" : "#3e3535",
+      }}
+    >
       <p
         style={{
           fontSize: "2.1243rem",
           fontWeight: 600,
-          color: "black",
+          color: props.theme === "white" ? "black" : "white",
+
           textAlign: "center",
         }}
       >
@@ -25,7 +31,6 @@ function Features() {
           margin: "0 auto 20px auto",
           borderTop: "2px solid brown",
           marginBottom: 50,
-
         }}
       />
       <Box sx={{ color: "black", margin: "0 20px" }}>

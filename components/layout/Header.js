@@ -106,6 +106,18 @@ function Header(props) {
             Pricing
           </AnchorLink>
           {router.pathname === "/" && props.auth.isAuthenticated && (
+            props.auth.user.user_type === "company" ?
+            <Link
+              href="/ide/test_results"
+              style={{
+                fontWeight: 500,
+                fontSize: 16,
+                marginRight: 40,
+              }}
+            >
+              Tests Results
+            </Link>
+            :
             <Link
               href="/ide"
               style={{
@@ -207,7 +219,7 @@ function Header(props) {
           )}
         </div>
       ) : (
-        <Drawer open={open} setOpen={setOpen} />
+        <Drawer open={open} setOpen={setOpen} theme={props.server.theme} />
       )}
     </div>
   );

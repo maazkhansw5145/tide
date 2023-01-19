@@ -2,24 +2,21 @@ import React from "react";
 import { Box, boxDefault } from "@mui/system";
 import { Button } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { connect } from "react-redux";
 import { selectUserType } from "../../redux/actions/authActions";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  "https://qubvoqsgnorlsylveylr.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF1YnZvcXNnbm9ybHN5bHZleWxyIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI2MTI0MzIsImV4cCI6MTk4ODE4ODQzMn0.qkXX296yTZfmvtcw4cRLbR8rZRvXKlcf2u3wHjF9C2o"
+);
+
 const AuthSelect = (props) => {
-  const navigation = useRouter();
-
-  const navigateAsCompany = () => {
-    navigation.push({
-      pathname: "/authentication/signup",
+  const loginWithGoogle = async () => {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
     });
   };
-
-  const navigateAsDev = () => {
-    navigation.push({
-      pathname: "/authentication/signup",
-    });
-  };
-
   return (
     <>
       <div
@@ -61,32 +58,31 @@ const AuthSelect = (props) => {
         alignItems="column"
         sx={boxDefault}
       >
-        <Link href="/authentication/signup">
-          <Button
-            onClick={() => {
-              props.selectUserType("company");
-            }}
-            value="company"
-            variant="contained"
-            color="secondary"
-            sx={{ marginTop: 15, borderRadius: 8, height: 60, width: 460 }}
-          >
-            Signup as a Company
-          </Button>
-        </Link>
-        <Link href="/authentication/signup">
-          <Button
-            onClick={() => {
-              props.selectUserType("programmer");
-            }}
-            value="dev"
-            variant="contained"
-            color="primary"
-            sx={{ marginTop: 5, borderRadius: 8, height: 60, width: 460 }}
-          >
-            Signup as a programmer
-          </Button>
-        </Link>
+        <Button
+          onClick={() => {
+            props.selectUserType("company");
+            loginWithGoogle();
+          }}
+          value="company"
+          variant="contained"
+          color="secondary"
+          sx={{ marginTop: 15, borderRadius: 8, height: 60, width: 460 }}
+        >
+          Login as a company
+        </Button>
+
+        <Button
+          onClick={() => {
+            props.selectUserType("programmer");
+            loginWithGoogle();
+          }}
+          value="dev"
+          variant="contained"
+          color="primary"
+          sx={{ marginTop: 5, borderRadius: 8, height: 60, width: 460 }}
+        >
+          Login as a programmer
+        </Button>
       </Box>
     </>
   );

@@ -64,11 +64,7 @@ function Login(props) {
       });
   };
 
-  const loginWithGoogle = async () => {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-    });
-  };
+  
 
   if (loading) {
     return <Loading />;
@@ -123,7 +119,7 @@ function Login(props) {
               boxShadow: "1px 2px 5px -1px rgb(0 0 0);",
               padding: "15px 0",
             }}
-            onClick={() => loginWithGoogle()}
+            onClick={() => router.push("/authentication/auth_select_login_with_google")}
           >
             <GoogleIcon style={{ color: "white", fontSize: 28 }} />
             <p style={{ marginLeft: 15, fontSize: 18, color: "white" }}>

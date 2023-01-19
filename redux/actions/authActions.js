@@ -86,8 +86,9 @@ export const clearAuthMsg = () => async (dispatch) => {
 };
 
 export const selectUserType = (type) => {
+  console.log("Select user action",type)
   return {
     type: USER_TYPE,
-    data: type
+    payload: type
   };
 };

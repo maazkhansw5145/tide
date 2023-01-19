@@ -208,17 +208,17 @@ function Index(props) {
           ></div>
         </div>
       </div>
-      <div style={{ margin: "120px 0" }} id="testimonial">
-        <Testimonials />
+      <div id="testimonial">
+        <Testimonials theme={props.server.theme} />
       </div>
-      <div style={{ margin: "50px 0" }} id="features">
-        <Features />
+      <div id="features">
+        <Features theme={props.server.theme} />
       </div>
-      <div style={{ margin: "50px 0", display: "block" }} id="pricing">
-        <Pricing windowWidth={windowWidth} />
+      <div id="pricing">
+        <Pricing windowWidth={windowWidth} theme={props.server.theme} />
       </div>
 
-      <div style={{ margin: "50px 0 0 0", display: "block" }}>
+      <div >
         <Footer />
       </div>
     </>

@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 function Pricing(props) {
   return (
-    <div>
+    <div style={{
+      padding: "150px 0",
+      background: props.theme === "white" ? "white" : "#3e3535",
+    }}>
       <h2
         style={{
           fontSize: 32,
           textAlign: "center",
           marginBottom: 10,
-          color: "black",
+          color: props.theme === "white" ? "black" : 'white',
           fontWeight:600
         }}
       >
@@ -42,6 +44,7 @@ function Pricing(props) {
                   padding: 0,
                   webkitTransition: "0.3s",
                   transition: "0.3s",
+                  color: props.theme === "white" ? "black" : "white",
                 }}
               >
                 <li
@@ -63,6 +66,7 @@ function Pricing(props) {
                     borderBottom: "1px solid #eee",
                     padding: 20,
                     textAlign: "center",
+                    color:'black'
                   }}
                 >
                   $ 50 / Monthly
@@ -147,6 +151,8 @@ function Pricing(props) {
                   padding: 0,
                   webkitTransition: "0.3s",
                   transition: "0.3s",
+                  color: props.theme === "white" ? "black" : "white",
+
                 }}
               >
                 <li
@@ -169,6 +175,7 @@ function Pricing(props) {
                     borderBottom: "1px solid #eee",
                     padding: 20,
                     textAlign: "center",
+                    color:'black'
                   }}
                 >
                   $ 1500 / Life Time
@@ -254,6 +261,8 @@ function Pricing(props) {
                   padding: 0,
                   webkitTransition: "0.3s",
                   transition: "0.3s",
+                  color: props.theme === "white" ? "black" : "white",
+
                 }}
               >
                 <li
@@ -275,6 +284,7 @@ function Pricing(props) {
                     borderBottom: "1px solid #eee",
                     padding: 20,
                     textAlign: "center",
+                    color:'black'
                   }}
                 >
                   $ 150 / Monthly

@@ -184,7 +184,7 @@ function Signup() {
               >
                 <GoogleIcon style={{ color: "white", fontSize: 28 }} />
                 <p style={{ marginLeft: 15, fontSize: 18, color: "white" }}>
-                  Login With Google
+                  Signup With Google
                 </p>
               </button>
             </div>

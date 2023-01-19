@@ -1,5 +1,5 @@
-.testimonial .slick-arrow.slick-prev,
-.testimonial .slick-arrow.slick-next {
+.testimonial .slick_arrow.slick_prev,
+.testimonial .slick_arrow.slick_next {
   width: 40px;
   height: 40px;
   display: flex;
@@ -8,19 +8,19 @@
   z-index: 1;
   border-radius: 5px;
 }
-.testimonial .slick-prev::before,
-.testimonial .slick-next::before {
+.testimonial .slick_prev::before,
+.testimonial .slick_next::before {
   display: none;
 }
-.testimonial .slick-arrow.slick-next {
+.testimonial .slick_arrow.slick_next {
   right: -70px;
 }
-.testimonial .slick-arrow.slick-prev {
+.testimonial .slick_arrow.slick_prev {
   left: -70px;
 }
-.testimonial .slick-dots li button:before {
+.testimonial .slick_dots li button:before {
   font-size: 15px;
 }
-.testimonial .slick-dots li {
+.testimonial .slick_dots li {
   top: 15px;
 }
