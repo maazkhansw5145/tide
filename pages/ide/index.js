@@ -12,11 +12,11 @@ function Ide(props) {
   const router = useRouter();
   const question = router.query.value;
   const [copied, setCopied] = useState(false);
-  // useEffect(() => {
-  //   if (!props.auth.isAuthenticated) {
-  //     router.push("/");
-  //   }
-  // }, [props.auth.isAuthenticated]);
+  useEffect(() => {
+    if (!props.auth.isAuthenticated) {
+      router.push("/authentication/login");
+    }
+  }, [props.auth.isAuthenticated]);
   return (
     <div
       className={
@@ -30,17 +30,17 @@ function Ide(props) {
         <span style={{ color: "blueviolet" }}>{question}</span>
       </h2>
       <Landing style={{ paddingTop: "30px !important" }} code={code} />
+      {props.auth.user.userType == "company" ?
       <div className="box-border flex m-10">
         <h4>{link}</h4>
-
         <CopyToClipboard text={link} onCopy={() => setCopied({ copied: true })}>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 ml-10 mb-2 rounded">
             Copy to clipboard
           </button>
         </CopyToClipboard>
-
+        
         {copied ? <span style={{ color: "red" }}>Copied.</span> : null}
-      </div>
+      </div>: null }
       </div>
   );
 }

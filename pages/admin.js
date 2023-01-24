@@ -5,17 +5,18 @@ import { Button, Box, boxDefault } from "@mui/material";
 import { useRouter } from "next/router";
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
+import { connect } from "react-redux";
 
-const Admin = () => {
+const Admin = (props) => {
   const [question, setQuestion] = useState("");
   const router = useRouter();
   const userType = router.query.value;
-  // useEffect(() => {
-  //   console.log("Router Query: ", userType);
-  //   if (userType !== "premium") {
-  //     router.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    console.log("Router Query: ", userType);
+    if (props.auth.user.userType !== "company") {
+      router.push("/");
+    }
+  }, []);
   const submit = () => {
     router.push({
       pathname: "/ide",
@@ -67,4 +68,9 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  server: state.server,
+});
+
+export default connect(mapStateToProps)(Admin);

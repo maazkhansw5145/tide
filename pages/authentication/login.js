@@ -73,13 +73,14 @@ function Login(props) {
   return (
     <div>
       <div
-        className="title"
+        className="title text-center"
         style={{
           display: "flex",
           background: "#3e3535",
         }}
-      >
-        <h3 style={{ margin: "20px auto", fontSize: 22 }}>Tide</h3>
+      > <Link className="text-center" href="/">
+        <h3 style={{ color: "white", margin: "20px auto", paddingLeft: "700px", fontSize: 22 }}>Tide</h3>
+        </Link>
         <div
           style={{ borderLeft: "1px solid black", height: 65, marginRight: 15 }}
         ></div>
